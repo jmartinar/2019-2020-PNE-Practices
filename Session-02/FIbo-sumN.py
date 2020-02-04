@@ -12,7 +12,6 @@ def fibon(n):
     else:
         return fibon(n - 1) + fibon(n - 2)
 
-n = int(input("Introduce the number of fibonacci terms you wanna sum"))
 
 def fibosum(n):
     fibosum  = 0
@@ -21,4 +20,5 @@ def fibosum(n):
 
     return fibosum
 
-print("The sum of the first 5 fibo terms is:", fibosum(n))
+print("The sum of the first 5 fibo terms is:", fibosum(5))
+print("The sum of the first 10 fibo terms is:", fibosum(10))
