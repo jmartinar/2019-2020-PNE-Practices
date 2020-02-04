@@ -1,5 +1,5 @@
 
-def FiboN(n):
+def fibon(n):
     if n < 0:
         print("Incorrect input")
         # First Fibonacci number is 0
@@ -9,6 +9,8 @@ def FiboN(n):
     elif n == 2:
         return 1
     else:
-        return FiboN(n - 1) + FiboN(n - 2)
+        return fibon(n - 1) + fibon(n - 2)
 
-print(FiboN(11))
+print("The 5th fibonacci number is:", fibon(5))
+print("The 10th fibonacci number is:", fibon(10))
+print("The 15th fibonacci number is:", fibon(15))
