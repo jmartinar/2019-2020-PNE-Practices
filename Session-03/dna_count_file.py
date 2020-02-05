@@ -1,12 +1,10 @@
-#Session 3 - Exercise 2
-
-dna_seq = input("Introduce the sequence: ")
 
 def total_length(dna_seq):
     counter = 0
     for letter in dna_seq:
         counter += 1
     return counter
+
 
 def letter_counter(dna_seq):
     a = 0
@@ -24,5 +22,6 @@ def letter_counter(dna_seq):
             c += 1
     return ("A: ", a, "C: ", c, "T:", t, "G: ", g)
 
-print("Total length is: ", total_length(dna_seq))
-print(letter_counter(dna_seq))
+with open ("dna.txt", "r") as f:
+    print(total_length(f))
+    print(letter_counter(f))
