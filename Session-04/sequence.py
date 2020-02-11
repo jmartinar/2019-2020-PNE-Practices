@@ -4,7 +4,9 @@ from pathlib import Path
 FILENAME = "ADA.txt"
 
 # -- Open and read the file
-file_contents = Path(FILENAME).read_text()
+file_contents = Path(FILENAME).read_text().split("\n")[1:]
 
 # -- Print the contents on the console
-print(len(file_contents))
+file_contents_final = "".join(file_contents)
+
+print(len(file_contents_final))
