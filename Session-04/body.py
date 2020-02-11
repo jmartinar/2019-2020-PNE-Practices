@@ -7,5 +7,6 @@ FILENAME = "U5.txt"
 file_contents = Path(FILENAME).read_text().split("\n")[1:]
 
 # -- Print the contents on the console
-for i in file_contents:
-    print(i)
+file_contents_final = "\n".join(file_contents)
+
+print(file_contents_final)
