@@ -2,12 +2,12 @@ class Seq:
     "A class for representing sequence objects"
     def __init__(self, strbases):
 
-        bases = ["A","T","C","G"]
-        if self.strbases in bases:
-            self.strbases = strbases
-            print("New seq created!")
-        else:
-
+        for x in list(strbases.split()):
+            if (x != "A") and (x != "T") and (x != "G") and (x !="C"):
+                print("Invalid seq detcted")
+            else:
+                print("Valid seq")
+                self.strbases = strbases
 
     def __str__(self):
         return self.strbases
