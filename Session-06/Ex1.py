@@ -7,6 +7,7 @@ class Seq:
                 print("Invalid sequence detected")
                 self.strbases = "ERROR"
                 return
+            
         print("New sequence created!")
         self.strbases = strbases
 
