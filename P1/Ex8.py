@@ -1,7 +1,7 @@
 from Seq1 import Seq
 
 #--Main prog
-print("-----|Practice 1, Exercise 7|-----")
+print("-----|Practice 1, Exercise 8|-----")
 
 s1 = Seq("")
 s2 = Seq("ACTGA")
