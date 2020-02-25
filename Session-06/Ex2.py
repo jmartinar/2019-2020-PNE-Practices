@@ -31,7 +31,7 @@ def print_seqs(seq_list):
 # -- Main prog
 print_seqs([Seq("ACT"), Seq("GATA"), Seq("CAGATA")])
 
-=======
+
     def __init__(self, strbases): #define in this function all our object1 properties
 
         for x in strbases:
