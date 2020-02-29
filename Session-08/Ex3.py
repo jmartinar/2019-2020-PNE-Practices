@@ -2,7 +2,7 @@ import socket
 
 # SERVER IP, PORT
 PORT = 8080
-IP = input("Introduce a valid IP: ")
+IP = "192.168.1.40"
 while True:
   # -- Ask the user for the message
     message = input("Introduce a message to send to the server: ")
