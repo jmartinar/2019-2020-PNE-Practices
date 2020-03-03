@@ -23,7 +23,7 @@ ls.bind((IP, PORT))
 ls.listen()
 
 print("The server is configured!")
-c = 0 #0 connections
+
 while True:
     # -- Waits for a client to connect
     print("Waiting for Clients to connect")
@@ -45,7 +45,6 @@ while True:
     else:
 
         print("A client has connected to the server!")
-        c = c + 1 #counts the number of connections
 
         # -- Read the message from the client
         # -- The received message is in raw bytes
