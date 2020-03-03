@@ -57,4 +57,4 @@ def print_seqs(seq_list):       #exercise 2: function to print the seq, its posi
         print("Sequence", i, ": (Length:",  seq_list[i].len(), ")",  seq_list[i])
 
 print_seqs([Seq("ACT"), Seq("GATA"), Seq("CAGATA")])
->>>>>>> origin/master
+
