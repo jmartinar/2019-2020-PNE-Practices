@@ -15,7 +15,7 @@ s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.connect((IP, PORT))
 
 #Send data to server
-s.send(str.encode("Ferrán callate"))
+s.send(str.encode("Hello this is my message and the servers echo response"))
 
 #Receive data from the server
 msg = s.recv(2000)
