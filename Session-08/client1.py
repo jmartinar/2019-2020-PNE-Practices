@@ -3,7 +3,7 @@ import socket
 # SERVER IP, PORT
 # Write here the correct parameter for connecting to the
 # Teacher's server
-PORT = 8081
+PORT = 8080
 IP = "192.168.1.40"   # Teacher's server ip
 
 
@@ -15,7 +15,7 @@ s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.connect((IP, PORT))
 
 #Send data to server
-s.send(str.encode(""))
+s.send(str.encode("Ferrán callate"))
 
 #Receive data from the server
 msg = s.recv(2000)
