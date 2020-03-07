@@ -44,6 +44,7 @@ print(c.talk("REV " + sequence_test))
 # TEST REV
 print("* Testing GENE...")
 files_list = ["U5", "ADA", "FRAT1", "FXN", "RNU6_269P"]
+
 for file in files_list:
     print("GENE", file)
     print(c.talk("GENE " + file))
