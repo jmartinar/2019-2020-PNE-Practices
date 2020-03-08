@@ -6,10 +6,12 @@ import termcolor
 PORT = 8080
 IP = "127.0.0.1"
 
+#create some random chains to use the program
 seq_list = ["TGTGAACATTCTGCACAGGTCTCTGGCTGCGCCTGGGCGGGTTTCTT", "CAGGAGGGGACTGTCTGTGTTCTCCCTCCCTCCGAGCTCCAGCCTTC",
             "CTCCCAGCTCCCTGGAGTCTCTCACGTAGAATGTCCTCTCCACCCC", "GAACTCCTGCAGGTTCTGCAGGCCACGGCTGGCCCCCCTCGAAAGT",
             "CTGCAGGGGGACGCTTGAAAGTTGCTGGAGGAGCCGGGGGGAA"]
 
+#------------------------------------CREATING THE SERVER------------------------------------
 # -- Step 1: create the socket
 ls = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
@@ -48,43 +50,45 @@ while True:
         # -- We decode it for converting it
         # -- into a human-redeable string
         msg = msg_raw.decode()
+
         argument_command = msg[msg.find(" ") + 1:] #para sacar la cadena que se solicita
         response = "ERROR"
 
     #ping
     if "PING" in msg:
-        response = "OK!\n"
+        response = "OK!\n"   #just prints a message to check its connected
 
     #get
     elif "GET" in msg:
-        response = seq_list[int(argument_command)]
+        response = seq_list[int(argument_command)]  #the get prints the chain located with the argument command chosen
 
     #info
     elif "INFO" in msg:
-        seq_info = Seq(argument_command)
-        count_bases_string = ""
-        for base, count in seq_info.count().items():
+        seq_info = Seq(argument_command) #gets the seq chosen
+        count_bases_string = "" #starts the count of bases in a new variable
+
+        for base, count in seq_info.count().items():    #loop to count the base and the times it appears on the chain
             s_base = str(base) + ": " + str(count) + " (" + str(
-                round(count / seq_info.len() * 100, 2)) + "%)" + "\n"
+                round(count / seq_info.len() * 100, 2)) + "%)" + "\n"   #calculates the percentage of the base in chain
             count_bases_string += s_base
 
         response = ("Sequence: " + str(seq_info) + "\n" +
                     "Total length: " + str(seq_info.len()) + "\n" +
-                    count_bases_string)
+                    count_bases_string)   #prints the result of the seq with its length and bases counted
 
     #complement
     elif "COMP" in msg:
-        seq_comp = Seq(argument_command)
-        response = seq_comp.complement() + "\n"
+        seq_comp = Seq(argument_command)    #takes the composite function with the method in Seq
+        response = seq_comp.complement() + "\n" #prints the complement
 
     #reverse
     elif "REV" in msg:
-        seq_rev = Seq(argument_command)
-        response = seq_rev.reverse() + "\n"
+        seq_rev = Seq(argument_command) #takes the reverse function with the method in Seq
+        response = seq_rev.reverse() + "\n" #prints it
 
     #gene
     elif "GENE" in msg:
-        gene = argument_command
+        gene = argument_command #takes the gene chosen in the argument
         s = Seq()
         s.read_fasta("../Session-04/" + gene + ".txt")
         response = str(s) + "\n"
