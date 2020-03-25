@@ -32,9 +32,9 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         # Modifications for Exercise 3
 
         # Message to send back to the client:
-        FOLDER = "../P5/"
-        if self.path == "/" or self.path == "/index.html":
-            file = "index.html"
+        FOLDER = "../Session-16/"
+        if self.path == "/" or self.path == "/echo.html":
+            file = "form-EX01.html"
             # Generating the response message
         else:
             file = self.path
