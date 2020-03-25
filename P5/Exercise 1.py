@@ -35,6 +35,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         FOLDER = "../P5/"
         if self.path == "/" or self.path == "/index.html":
             file = "index.html"
+
             # Generating the response message
         else:
             file = self.path
