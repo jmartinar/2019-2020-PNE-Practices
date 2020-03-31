@@ -29,21 +29,34 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             <title>RESULT</title>
           </head>
           <body>
-            <h1>Received message:</h1>
+            <h2>Echoing the received message:</h2>
             <p></p>
             <a href="http://127.0.0.1:8080/">Main Page </a>
           </body>
         </html>
         """
 
-        if self.path == "/" :
-            file = "form-EX01.html"
+        if self.path == "/":
+
+            file = "form-EX02.html"
+
             contents = Path(file).read_text()
+
             self.send_response(200)  # -- Status line: OK!
 
         elif "/echo" == self.path[0:5]:
-            msg = self.path[10:]
-            contents = body[0:body.find("<p>") + 3] + msg + body[body.find("</p>"):]
+
+            chk = self.path[self.path.find("chk") + 4:]
+
+            if "chk" in self.path and "on" == chk:
+                msg = self.path[self.path.find("msg") + 4: self.path.find("&")]
+                msg_converted = msg.upper()
+
+            else:
+                msg = self.path[self.path.find("msg") + 4:]
+                msg_converted = msg
+
+            contents = body[0:body.find("<p>") + 3] + msg_converted + body[body.find("</p>"):]
             self.send_response(200)  # -- Status line: OK!
 
         else:
