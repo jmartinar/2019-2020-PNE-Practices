@@ -149,7 +149,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 body = response.read().decode("utf_8") #utf_8 to admit all characters in the response
                 karyotype_data = body["karyotype"] #list to save all the names
 
-                for chromosome in karyotype_data: #iteration to print all the cromosomes names
+                for chromosome in karyotype_data: #iteration to print all the chromosomes names
                     contents += f"""<p> - {chromosome} </p>"""
                     contents += f"""<a href="/">Main page </a></body></html>""" #link to return to main page
 
@@ -198,7 +198,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 body = response.read().decode('utf_8')#utf_8 to admit all characters in the response
                 body = json.loads(body) #loads is a json method to read json response
 
-                chromosome_data = body["top_level_region"]
+                chromosome_data = body["top_level_region"] #list to save all the chromosomes
 
                 for chromo in chromosome_data: #iteration to get all the chromosomes within the list
 
