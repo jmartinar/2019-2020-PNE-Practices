@@ -1,105 +1,170 @@
-from Seq1 import Seq
-import socket
+import http.server
+import socketserver
 import termcolor
+from pathlib import Path
+from Seq1 import Seq
 
-# Configure the Server's IP and PORT
+# Define the Server's port
 PORT = 8080
 IP = "127.0.0.1"
 
-#create some random chains to use the program
-seq_list = ["TGTGAACATTCTGCACAGGTCTCTGGCTGCGCCTGGGCGGGTTTCTT", "CAGGAGGGGACTGTCTGTGTTCTCCCTCCCTCCGAGCTCCAGCCTTC",
-            "CTCCCAGCTCCCTGGAGTCTCTCACGTAGAATGTCCTCTCCACCCC", "GAACTCCTGCAGGTTCTGCAGGCCACGGCTGGCCCCCCTCGAAAGT",
-            "CTGCAGGGGGACGCTTGAAAGTTGCTGGAGGAGCCGGGGGGAA"]
+def html_response(title="", body=""):
+    default_body = f"""
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>{title}</title>
+  </head>
+  <body>{body}
+    </body>
+    <body>
+    <a href="http://127.0.0.1:8080/">Main Page </a>
+  </body>
+</html>
+"""
 
-#------------------------------------CREATING THE SERVER------------------------------------
-# -- Step 1: create the socket
-ls = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    return default_body
 
-# -- Optional: This is for avoiding the problem of Port already in use
-ls.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
-# -- Step 2: Bind the socket to server's IP and PORT
-ls.bind((IP, PORT))
+def argument_command(request_line):
+    argument = request_line[request_line.find("=") + 1:]
+    return argument
 
-# -- Step 3: Configure the socket for listening
-ls.listen()
 
-while True:
-    # -- Waits for a client to connect
-    print("Waiting for Clients to connect")
+# -- This is for preventing the error: "Port already in use"
+socketserver.TCPServer.allow_reuse_address = True
 
+
+# Class with our Handler. It is a called derived from BaseHTTPRequestHandler
+# It means that our class inheritates all his methods and properties
+class TestHandler(http.server.BaseHTTPRequestHandler):
+
+    def do_GET(self):
+        """This method is called whenever the client invokes the GET method
+        in the HTTP protocol request"""
+
+        # Print the request line
+        termcolor.cprint(self.requestline, 'green')
+
+        if self.path == "/":
+
+            file = "form-4.html"
+
+            contents = Path(file).read_text()
+
+            error = 200
+
+        elif "/ping" in self.path:
+            html = "<h1>PING OK!</h1><p>The SEQ2 server is running...</p>"
+            contents = html_response("PING", html)
+            error = 200
+
+        elif "/get" in self.path:
+
+            seq_list = ["TGTGAACATTCTGCACAGGTCTCTGGCTGCGCCTGGGCGGGTTTCTT",
+                        "CAGGAGGGGACTGTCTGTGTTCTCCCTCCCTCCGAGCTCCAGCCTTC",
+                        "CTCCCAGCTCCCTGGAGTCTCTCACGTAGAATGTCCTCTCCACCCC",
+                        "GAACTCCTGCAGGTTCTGCAGGCCACGGCTGGCCCCCCTCGAAAGT",
+                        "CTGCAGGGGGACGCTTGAAAGTTGCTGGAGGAGCCGGGGGGAA"]
+
+            sequence_number = int(argument_command(self.path))
+            sequence = seq_list[sequence_number]
+
+            html = "<h1>Sequence number " + str(sequence_number) + "</h1><p>" + sequence + "</p>"
+            contents = html_response("GET", html)
+
+            error = 200  # -- Status line: OK!
+
+        elif "/gene" in self.path:
+
+            gene = argument_command(self.path)
+
+            s = Seq()
+            s.read_fasta("../Session-04/" + gene + ".txt")
+
+            html = "<h1>Gene Sequence: " + gene + '</h1><textarea readonly rows = "20" cols = "80">' + str(
+                s) + '</textarea>'
+            contents = html_response("GENE", html)
+
+            error = 200
+
+        elif "/operation" in self.path:
+
+            requests = self.path.split("&")
+            sequence = argument_command(requests[0])
+            op = argument_command(requests[1])
+
+            if "info" == op:
+                seq_info = Seq(sequence)
+                count_bases_string = ""
+                for base, count in seq_info.count().items():
+                    s_base = str(base) + ": " + str(count) + " (" + str(
+                        round(count / seq_info.len() * 100, 2)) + "%)" + "<br>"
+                    count_bases_string += s_base
+
+                response_info = ("Sequence: " + str(seq_info) + " <br>" +
+                                 "Total length: " + str(seq_info.len()) + "<br>" +
+                                 count_bases_string)
+
+                html_operation = "<h1>Operation:</h1><p>Info</p>"
+                html_result = "<h1>Result:</h1>" + "<p>" + response_info + "</p>"
+
+            elif "comp" == op:
+                seq_comp = Seq(sequence)
+                response_comp = seq_comp.complement() + "\n"
+
+                html_operation = "<h1>Operation:</h1><p>Comp</p>"
+                html_result = "<h1>Result:</h1>" + "<p>" + response_comp + "</p>"
+
+            elif "rev" == op:
+                seq_rev = Seq(sequence)
+                response_rev = seq_rev.reverse() + "\n"
+
+                html_operation = "<h1>Operation:</h1><p>Rev</p>"
+                html_result = "<h1>Result:</h1>" + "<p>" + response_rev + "</p>"
+
+            html_sequence = "<h1>Sequence:</h1>" + "<p>" + sequence + "</p>"
+            html = html_sequence + html_operation + html_result
+
+            contents = html_response("OPERATION", html)
+            error = 200
+
+        else:
+            file = "Error.html"
+            contents = Path(file).read_text()
+            self.send_response(404)  # -- Status line: ERROR NOT FOUND
+
+        self.send_response(error)
+        # Generating the response message
+        # Define the content-type header:
+        self.send_header('Content-Type', 'text/html')
+        self.send_header('Content-Length', len(str.encode(contents)))
+
+        # The header is finished
+        self.end_headers()
+
+        # Send the response message
+        self.wfile.write(str.encode(contents))
+
+        return
+
+
+# ------------------------
+# - Server MAIN program
+# ------------------------
+# -- Set the new handler
+Handler = TestHandler
+
+# -- Open the socket server
+with socketserver.TCPServer(("", PORT), Handler) as httpd:
+    print("Serving at PORT", PORT)
+
+    # -- Main loop: Attend the client. Whenever there is a new
+    # -- clint, the handler is called
     try:
-        (cs, client_ip_port) = ls.accept()
-
-    # -- Server stopped manually
+        httpd.serve_forever()
     except KeyboardInterrupt:
-        print("Server stopped by the user")
-
-        # -- Close the listenning socket
-        ls.close()
-
-        # -- Exit!
-        exit()
-
-    else:
-
-        # -- Read the message from the client
-        # -- The received message is in raw bytes
-        msg_raw = cs.recv(2048)
-
-        # -- We decode it for converting it
-        # -- into a human-redeable string
-        msg = msg_raw.decode()
-
-        argument_command = msg[msg.find(" ") + 1:] #para sacar la cadena que se solicita
-        response = "ERROR"
-
-    #ping
-    if "PING" in msg:
-        response = "OK!\n"   #just prints a message to check its connected
-
-    #get
-    elif "GET" in msg:
-        response = seq_list[int(argument_command)]  #the get prints the chain located with the argument command chosen
-
-    #info
-    elif "INFO" in msg:
-        seq_info = Seq(argument_command) #gets the seq chosen
-        count_bases_string = "" #starts the count of bases in a new variable
-
-        for base, count in seq_info.count().items():    #loop to count the base and the times it appears on the chain
-            s_base = str(base) + ": " + str(count) + " (" + str(
-                round(count / seq_info.len() * 100, 2)) + "%)" + "\n"   #calculates the percentage of the base in chain
-            count_bases_string += s_base
-
-        response = ("Sequence: " + str(seq_info) + "\n" +
-                    "Total length: " + str(seq_info.len()) + "\n" +
-                    count_bases_string)   #prints the result of the seq with its length and bases counted
-
-    #complement
-    elif "COMP" in msg:
-        seq_comp = Seq(argument_command)    #takes the composite function with the method in Seq
-        response = seq_comp.complement() + "\n" #prints the complement
-
-    #reverse
-    elif "REV" in msg:
-        seq_rev = Seq(argument_command) #takes the reverse function with the method in Seq
-        response = seq_rev.reverse() + "\n" #prints it
-
-    #gene
-    elif "GENE" in msg:
-        gene = argument_command #takes the gene chosen in the argument
-        s = Seq()
-        s.read_fasta("../Session-04/" + gene + ".txt")
-        response = str(s) + "\n"
-
-        # -- The message has to be encoded into bytes
-        # Server Console
-
-    termcolor.cprint(msg[:msg.find(" ")], "green")
-    print(response)
-
-    # Client console
-    cs.send(response.encode())
-    # -- Close the data socket
-    cs.close()
+        print("")
+        print("Stoped by the user")
+        httpd.server_close()
