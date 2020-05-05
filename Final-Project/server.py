@@ -7,30 +7,7 @@ from Seq1 import Seq
 # Define the Server's port
 PORT = 8080
 IP = "127.0.0.1"
-
-def html_response(title="", body=""):
-    default_body = f"""
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>{title}</title>
-  </head>
-  <body>{body}
-    </body>
-    <body>
-    <a href="http://127.0.0.1:8080/">Main Page </a>
-  </body>
-</html>
-"""
-
-    return default_body
-
-
-def argument_command(request_line):  #getting the number of the gene asked for
-    argument = request_line[request_line.find("=") + 1:]
-    return argument
-
+bases = ['A', 'C', 'T', 'G']
 
 # -- This is for preventing the error: "Port already in use"
 socketserver.TCPServer.allow_reuse_address = True
