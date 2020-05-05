@@ -72,11 +72,11 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 except ConnectionRefusedError:   #exception for connection
                     print("ERROR! Cannot connect to the Server")
                     exit()
-                    # -- Read the response message from the server
 
+                # -- Read the response message from the server
                 response = conn.getresponse()
                 # -- Read the response's body
-                body = response.read().decode('UTF_8') #utf_8 to admit all characters in the response
+                body = response.read().decode('utf_8') #utf_8 to admit all characters in the response
 
                 limit_list = [] #list to keep all species
                 body = json.loads(body) #loads is a json method to read json response
@@ -122,24 +122,26 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 seq_name, name_sp = seq_n[0].split("=")  # splits by the =
 
                 index = int(index)
-                endpoint = 'info/assembly/'
+                endpoint = 'info/assembly/'  #stablishes the endpoint and its parameters for the request
                 parameters = '?content-type=application/json'
                 request = endpoint + name_sp + parameters
 
                 try:
-                    conn.request("GET", request)
-                except ConnectionRefusedError:
+                    conn.request("GET", request) #conn request
+                except ConnectionRefusedError: #exception for connection
                     print("ERROR! Cannot connect to the Server")
                     exit()
+
                 # -- Read the response message from the server
                 response = conn.getresponse()
-                # -- Read the response's body
-                body = response.read().decode("utf-8")
-                karyotype_data = body["karyotype"]
 
-                for chromosome in karyotype_data:
+                # -- Read the response's body
+                body = response.read().decode("utf_8") #utf_8 to admit all characters in the response
+                karyotype_data = body["karyotype"] #list to save all the names
+
+                for chromosome in karyotype_data: #iteration to print all the cromosomes names
                     contents += f"""<p> - {chromosome} </p>"""
-                    contents += f"""<a href="/">Main page </a></body></html>"""
+                    contents += f"""<a href="/">Main page </a></body></html>""" #link to return to main page
 
 
 
