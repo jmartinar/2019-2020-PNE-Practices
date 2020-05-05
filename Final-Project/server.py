@@ -39,16 +39,39 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         try:
             if first_argument == "/":  #return an HTML page with the forms for accessing to all the previous services
 
-
+                contents = Path('index.html').read_text()
                 self.send_response(200)
 
-            else:
-                if first_argument in 'listSpecies':
-                    ENDPOINT = '/info/species'
-                    conn.request("GET", ENDPOINT + ALWAYS_PARAMS)
-                    resp1 = conn.getresponse()
-                    data_ = resp1.read().decode("utf-8")
-                    api_info = json.loads(data_)
+            elif first_argument == '/listSpecies':
+                contents = f"""<!DOCTYPE html>
+                                    <html lang = "en">
+                                    <head>
+                                     <meta charset = "utf-8" >
+                                     <title>List of species in the browser</title >
+                                    </head >
+                                    <body>
+                                    <p>The total number of species in ensembl is: 267</p>"""
+
+                # We get the arguments that go after the ? symbol
+                get_value = arguments[1]
+
+                # We get the seq index, after we have a couple of elements, the one which we need is the value of the index
+                # position of the sequence
+                seq_n = get_value.split('?')
+                seq_name, index = seq_n[0].split("=")
+                index = int(index)
+                contents += f"""<p>The number of species you selected are: {index} </p>"""
+                server = 'rest.ensembl.org'
+                endpoint = 'info/species'
+                parameters = '?content-type=application/json'
+                conn = http.client.HTTPConnection(server)
+                request = endpoint + parameters
+
+
+
+
+
+
 
      # Open the form1.html file
             # Read the index from th
