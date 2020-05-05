@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>MAIN PAGE - INITIAL</title>
+  </head>
+  <body>
+    <h1>BROWSING HUMAN AND VERTEBRATES GENOME</h1>
+    <p>BASIC LEVEL SERVICES</p>
+    <hr>
+    <form action="listSpecies" method="get">
+      1)List of species in the genome database
+      <br>
+      Limit:
+      <input type="text" name="Limit">
+      <br>
+      <br>
+      <input type="submit" value="SEND">
+    <br>
+    </form>
+    <hr>
+    <form action="karyotype" method="get">
+      2) Information about the karyotype
+      <br>
+      Select the specie:
+      <input type="text" name="Specie">
+      <br>
+          <br>
+      <input type="submit" value="SEND">
+    <br>
+    </form>
+    <hr>
+  <form action="chromosomeLength" method="get">
+      3) Chromosome length
+      <br>
+      Select the specie:
+      <input type="text" name="Specie">
+      <br>
+      Select the chromosome:
+      <input type="text" name="Chromosome">
+      <br>
+      <br>
+      <input type="submit" value="SEND">
+      <br>
+    </form>
+    <hr>
+  <form action="geneSeq" method="get">
+      4) Write a gene name for getting its sequence
+      <br>
+      Select the gene:
+      <input type="text" name="Gen">
+      <br>
+      <input type="submit" value="SEND">
+      <br>
+    </form>
+   <hr>
+  <form action="geneInfo" method="get">
+      5) Write a gene name for getting its information
+      <br>
+      Select the gene:
+      <input type="text" name="Gen">
+      <br>
+      <input type="submit" value="SEND">
+      <br>
+    </form>
+    <hr>
+  <form action="geneCalc" method="get">
+      6) Write a gene name for getting calculations about its sequence
+      <br>
+      Select the gene:
+      <input type="text" name="Gen">
+      <br>
+      <input type="submit" value="SEND">
+      <br>
+    </form>
+    <hr>
+  <form action="geneList" method="get">
+      7) Write a chromosome name and an interval within its gene sequence for getting it
+      <br>
+      Select the chromosome:
+      <input type="text" name="Chromosome">
+      <br>
+      Select the start:
+      <input type="text" name="Start">
+      <br>
+      Select the end:
+      <input type="text" name="End">
+      <br>
+      <input type="submit" value="SEND">
+      <br>
+    </form>
+  <hr>
+  </body>
+</html>
