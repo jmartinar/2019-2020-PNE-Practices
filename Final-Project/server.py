@@ -200,7 +200,8 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
                 chromosome_data = body["top_level_region"]
 
-                for chromo in chromosome_data:
+                for chromo in chromosome_data: #iteration to get all the chromosomes within the list
+
                     if chromo["name"] == str(chromosome):
                         length = chromo["length"]
                         contents = f"""<!DOCTYPE html><html lang = "en"><head><meta charset = "utf-8" ><title> Length Chromosome</title >
