@@ -169,7 +169,6 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
                 chromosome_index, chromosome = pairs[1].split("=") #having pair[1] as the species name
 
-                specie = specie
                 contents = f"""<!DOCTYPE html>
                             <html lang = "en">
                             <head>
