@@ -36,11 +36,16 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         contents = Path('Error.html').read_text()
         self.send_response(404)
 
+
+
         try:
             if first_argument == "/":  #return an HTML page with the forms for accessing to all the previous services
 
                 contents = Path('index.html').read_text()   #contents displayed in index.html
                 self.send_response(200)
+
+
+
 
             elif first_argument == '/listSpecies':     #part 2, list species
                 contents = f"""<!DOCTYPE html> 
@@ -102,6 +107,11 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                                 contents += f"""<p> - {specie} </p>"""
                     contents += f"""<a href="/">Main page</a></body></html>""" #link to return to main page
 
+
+
+
+
+
             elif first_argument == '/karyotype': #returns the names of the cromosomes of the chosen species
 
                 contents = f"""<!DOCTYPE html>
@@ -142,6 +152,59 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 for chromosome in karyotype_data: #iteration to print all the cromosomes names
                     contents += f"""<p> - {chromosome} </p>"""
                     contents += f"""<a href="/">Main page </a></body></html>""" #link to return to main page
+
+
+
+
+
+            elif first_argument == "/chromosomeLength":
+
+                # We get the arguments that go after the ?, it will get us the SPECIE&CHROMOSOME
+                pair = arguments[1]
+
+                # We have a couple of elements, we need the sequence that we previously wrote and the operation to perform
+                # that we previously selected
+                pairs = pair.split('&')  #splits by the &
+                specie_name, specie = pairs[0].split("=") #having pair[0] as the species name
+
+                chromosome_index, chromosome = pairs[1].split("=") #having pair[1] as the species name
+
+                specie = specie
+                contents = f"""<!DOCTYPE html>
+                            <html lang = "en">
+                            <head>
+                             <meta charset = "utf-8" >
+                             <title>ERROR</title >
+                            </head>
+                            <body>
+                            <p>ERROR INVALID VALUE. Introduce an integer value for chromosome</p>
+                            <a href="/">Main page</a></body></html>"""
+
+
+                endpoint = 'info/assembly/' #stablishes the endpoint and its parameters for the reques
+                parameters = '?content-type=application/json'
+                request = endpoint + specie + parameters #request line
+
+                try:
+                    conn.request("GET", request)  #conn request
+                except ConnectionRefusedError: #exception for connection
+                    print("ERROR! Cannot connect to the Server")
+                    exit()
+
+                # -- Read the response message from the server
+                response = conn.getresponse()
+
+                # -- Read the response's body
+                body = response.read().decode('utf_8')#utf_8 to admit all characters in the response
+                body = json.loads(body) #loads is a json method to read json response
+
+                chromosome_data = body["top_level_region"]
+
+                for chromo in chromosome_data:
+                    if chromo["name"] == str(chromosome):
+                        length = chromo["length"]
+                        contents = f"""<!DOCTYPE html><html lang = "en"><head><meta charset = "utf-8" ><title> Length Chromosome</title >
+                                        </head ><body><h2> The length of the chromosome is: {length}</h2><a href="/"> Main page</a"""
 
 
 
