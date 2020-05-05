@@ -27,7 +27,7 @@ def html_response(title="", body=""):
     return default_body
 
 
-def argument_command(request_line):
+def argument_command(request_line):  #getting the number of the gene asked for
     argument = request_line[request_line.find("=") + 1:]
     return argument
 
