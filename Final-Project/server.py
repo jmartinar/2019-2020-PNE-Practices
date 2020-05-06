@@ -90,9 +90,9 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 # -- Read the response's body
                 body = response.read().decode('utf_8') #utf_8 to admit all characters in the response
 
-                limit_list = [] #list to save all species
+                limit_list = [] #list to save all species within the limit
                 body = json.loads(body) #loads is a json method to read json response
-                limit = body["species"]
+                limit = body["species"] #json.loads(species)
 
                 if index > len(limit):   #if there are more species than the limit
                     contents = f"""<!DOCTYPE html>
@@ -106,7 +106,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                                             <a href="/">Main page</a></body></html>"""
                 else:
                     for element in limit:  #iteration to get all the species within the limit
-                        limit_list.append(element["display_name"])
+                        limit_list.append(element["display_name"])   #appends each element to the list
 
                         if len(limit_list) == index:
                             contents += f"""<p>The species are: </p>"""
@@ -119,7 +119,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
             # --------------------------------------------karyotype--------------------------------------------
 
-            elif first_argument == '/karyotype': #returns the names of the cromosomes of the chosen species
+            elif first_argument == '/karyotype': #part3, returns the names of the cromosomes of the chosen species
 
                 contents = f"""<!DOCTYPE html>
                                 <html lang = "en">
@@ -133,8 +133,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 # Get the arguments after the ?
                 get_value = arguments[1]
 
-                # We get the seq index, we need the value of the index
-                # position of the sequence
+                # We get the seq index and name
                 seq_n = get_value.split('?')  # splits by the ?
                 seq_name, name_sp = seq_n[0].split("=")  # splits by the =
 
@@ -144,11 +143,12 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 request = endpoint + name_sp + parameters
 
                 try:
-                    conn.request("GET", request) #conn request
-                except ConnectionRefusedError: #exception for connection
+                    conn.request("GET", request) #connection request
+                except ConnectionRefusedError: #exception for connection error
                     print("ERROR! Cannot connect to the Server")
                     exit()
 
+                # ----------------------Main program of karyotype------------------------
                 # -- Read the response message from the server
                 response = conn.getresponse()
 
@@ -162,20 +162,20 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
 
 
-            # --------------------------------------------cromosome length--------------------------------------------
+            # --------------------------------------------Cromosome length--------------------------------------------
 
-            elif first_argument == "/chromosomeLength":
+            elif first_argument == "/chromosomeLength": #part4, Return the Length of the chromosome named "chromo" of the given specie
 
                 # We get the arguments that go after the ?, it will get us the SPECIE&CHROMOSOME
                 pair = arguments[1]
 
-                # We have a couple of elements, we need the sequence that we previously wrote and the operation to perform
-                # that we previously selected
+                # We have to separate both the species name and the chromo index inputed
                 pairs = pair.split('&')  #splits by the &
                 specie_name, specie = pairs[0].split("=") #having pair[0] as the species name
 
                 chromosome_index, chromosome = pairs[1].split("=") #having pair[1] as the species name
 
+                #html form for when no chromosome index is inputed
                 contents = f"""<!DOCTYPE html>
                             <html lang = "en">
                             <head>
@@ -192,11 +192,12 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 request = endpoint + specie + parameters #request line
 
                 try:
-                    conn.request("GET", request)  #conn request
-                except ConnectionRefusedError: #exception for connection
+                    conn.request("GET", request)  #connection request
+                except ConnectionRefusedError: #exception for connection error
                     print("ERROR! Cannot connect to the Server")
                     exit()
 
+                # ----------------------Main program of chromosome length------------------------
                 # -- Read the response message from the server
                 response = conn.getresponse()
 
@@ -206,7 +207,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
                 chromosome_data = body["top_level_region"] #list to save all the chromosomes
 
-                for chromo in chromosome_data: #iteration to get all the chromosomes within the list
+                for chromo in chromosome_data: #iteration to get all the chromosomes within the list of data
 
                     if chromo["name"] == str(chromosome):
                         length = chromo["length"]
@@ -246,7 +247,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
 
 # ------------------------
-# - Server MAIN program
+# - Server MAIN program (taken from previous practices)
 # ------------------------
 # -- Set the new handler
 Handler = TestHandler
