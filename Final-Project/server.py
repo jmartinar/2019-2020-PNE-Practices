@@ -202,7 +202,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 response = conn.getresponse()
 
                 # -- Read the response's body
-                body = response.read().decode('utf_8')#utf_8 to admit all characters in the response
+                body = response.read().decode('utf-8')#utf_8 to admit all characters in the response
                 body = json.loads(body) #loads is a json method to read json response
 
                 chromosome_data = body["top_level_region"] #list to save all the chromosomes
@@ -213,6 +213,69 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                         length = chromo["length"]
                         contents = f"""<!DOCTYPE html><html lang = "en"><head><meta charset = "utf-8" ><title> Length Chromosome</title >
                                         </head ><body><h2> The length of the chromosome is: {length}</h2><a href="/"> Main page</a"""
+
+            # --------------------------------------------gene Seq--------------------------------------------
+
+            elif first_argument == "/geneSeq": #Return the sequence of a given human gene
+
+                contents = f"""<!DOCTYPE html>
+                            <html lang = "en">            
+                            <head>  
+                            <meta charset = "utf-8"
+                            <title> Gene Sequence </title>
+                            </head>"""
+
+                # We get the arguments that go after the ?
+                get_value = arguments[1]
+
+                # We get the seq index, after we have a couple of elements, the one which we need is the value of the index
+                # position of the sequence
+                seq_n = get_value.split('?') #splits the argument by the ?
+                seq_name, name_seq = seq_n[0].split("=")   # #splits by the = --> name of the gene inputed
+
+                contents += f"""<p> The sequence of gene {name_seq} is:  </p>""" #html to print the gene name
+
+                first_endpoint = "xrefs/symbol/homo_sapiens/"   #first endpoint = homosapiens --> human gene
+                parameters = '?content-type=application/json'
+                first_request = first_endpoint + name_seq + parameters
+
+                try:
+                    conn.request("GET", first_request) #connection request
+
+                except ConnectionRefusedError: #exception for connection error
+                    print("ERROR! Cannot connect to the Server")
+                    exit()
+
+                # ----------------------Main program of geneSeq------------------------
+
+                # -- Read the response message from the server
+                response = conn.getresponse()
+                # -- Read the response's body
+                body = response.read().decode()
+                body = json.loads(body) #loads is a json method to read json response
+
+                id_gene = body[0] #to get the id of the gene (first column of body) #json.loads(id)
+                id_gene = id_gene["id"]
+
+                second_endpoint = "sequence/id/" #to get specifically the sequence of the gene we id'd
+                second_request = second_endpoint + id_gene + parameters
+
+                try:
+                    conn.request("GET", second_request)#connection request
+
+                except ConnectionRefusedError: #exception for connection error
+                    print("ERROR! Cannot connect to the Server")
+                    exit()
+
+                # -- Read the second response message from the server
+                second_response = conn.getresponse()
+
+                # -- Read the second response's body
+                second_body = second_response.read().decode("utf-8")
+                second_body = json.loads(second_body) #loads is a json method to read json response
+
+                sequence = second_body["seq"] #gene sequence asked
+                contents += f"""<p>{sequence}</p><a href="/">Main page</a></body></html>"""  #print the sequence on screen
 
 
 
