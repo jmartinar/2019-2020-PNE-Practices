@@ -1,11 +1,11 @@
 import http.server
 import socketserver
 import termcolor
-from pathlib import Path
-from Seq1 import Seq
+from pathlib import Pat
+from Seq import Seq1
 import json
 
-# Define the Server's port
+# Define the Server's port, IP and bases
 PORT = 8080
 IP = "127.0.0.1"
 bases = ['A', 'C', 'T', 'G']
@@ -29,25 +29,28 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         # Print the request line
         termcolor.cprint(self.requestline, 'green') #green request line
 
-        req_line = self.requestline.split(' ') #splits it by the spaces
+        req_line = self.requestline.split(' ') #splits the request line (by the spaces)
 
-        arguments = (req_line[1]).split("?") #sWe get the first request line and then the path, goes after /. We get the arguments that go after the ?
+        arguments = (req_line[1]).split("?")  #We get the first request line and then the path, goes after /. We get the arguments that go after the ?
+
         first_argument = arguments[0] #sets the first argument
-        contents = Path('Error.html').read_text()
+
+        contents = Path('Error.html').read_text() #no argument --> error form
         self.send_response(404)
 
-
-
+        #--------------------------------------------MAIN PROGRAM--------------------------------------------
         try:
+
+            # --------------------------------------------only / --------------------------------------------
             if first_argument == "/":  #return an HTML page with the forms for accessing to all the previous services
 
                 contents = Path('index.html').read_text()   #contents displayed in index.html
                 self.send_response(200)
 
 
+            #--------------------------------------------listSpecies--------------------------------------------
 
-
-            elif first_argument == '/listSpecies':     #part 2, list species
+            elif first_argument == '/listSpecies':     #part 2, list species --> html form list the names of all the species available in the database
                 contents = f"""<!DOCTYPE html> 
                                     <html lang = "en">
                                     <head>
@@ -60,15 +63,14 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 #Get the arguments after the ?
                 get_value = arguments[1]
 
-                # We get the seq index, we need the value of the index
-                # position of the sequence
-                seq_n = get_value.split('?')  #splits by the ?
+                #We need the value of the index --> position of the sequence
+                seq_n = get_value.split('?')  #splits the argument by the ?
                 seq_name, index = seq_n[0].split("=")  #splits by the =
 
                 index = int(index)
-                contents += f"""<p>The number of species you selected are: {index} </p>""" #html to show the total numbers of species selected
+                contents += f"""<p>The number of species selected are: {index} </p>""" #html to print the total numbers of species selected
 
-                endpoint = 'info/species'  #stablishes the endpoint and its parameters for the reques
+                endpoint = 'info/species'  #stablishes the endpoint and its parameters for the request
                 parameters = '?content-type=application/json'
                 request = endpoint + parameters
 
@@ -110,7 +112,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
 
 
-
+            # --------------------------------------------karyotype--------------------------------------------
 
             elif first_argument == '/karyotype': #returns the names of the cromosomes of the chosen species
 
@@ -155,7 +157,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
 
 
-
+            # --------------------------------------------cromosome length--------------------------------------------
 
             elif first_argument == "/chromosomeLength":
 
