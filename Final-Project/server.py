@@ -1,8 +1,8 @@
 import http.server
 import socketserver
 import termcolor
-from pathlib import Pat
-from Seq import Seq1
+from pathlib import Path
+from Seq1 import Seq
 import json
 
 # Define the Server's port, IP and bases
@@ -75,17 +75,22 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 request = endpoint + parameters
 
                 try:
-                    conn.request("GET", request)   #conn request
-                except ConnectionRefusedError:   #exception for connection
+                    conn.request("GET", request)   #connection request
+
+                except ConnectionRefusedError:   #exception for connection error
                     print("ERROR! Cannot connect to the Server")
                     exit()
 
+
+                #----------------------Main program of listSpecies------------------------
+
                 # -- Read the response message from the server
                 response = conn.getresponse()
+
                 # -- Read the response's body
                 body = response.read().decode('utf_8') #utf_8 to admit all characters in the response
 
-                limit_list = [] #list to keep all species
+                limit_list = [] #list to save all species
                 body = json.loads(body) #loads is a json method to read json response
                 limit = body["species"]
 
@@ -235,21 +240,27 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
             return
 
-    # ------------------------
-    # - Server MAIN program
-    # ------------------------
-    # -- Set the new handler
-    Handler = TestHandler
 
-    # -- Open the socket server
-    with socketserver.TCPServer(("", PORT), Handler) as httpd:
-        print("Serving at PORT", PORT)
+        except (KeyError, ValueError, IndexError, TypeError):
+            contents = Path('error.html').read_text()
 
-        # -- Main loop: Attend the client. Whenever there is a new
-        # -- clint, the handler is called
-        try:
-            httpd.serve_forever()
-        except KeyboardInterrupt:
-            print("")
-            print("Stoped by the user")
-            httpd.server_close()
+
+# ------------------------
+# - Server MAIN program
+# ------------------------
+# -- Set the new handler
+Handler = TestHandler
+
+# -- Open the socket server
+with socketserver.TCPServer(("", PORT), Handler) as httpd:
+
+    print("Serving at PORT", PORT)
+
+    # -- Main loop: Attend the client. Whenever there is a new
+    # -- clint, the handler is called
+    try:
+        httpd.serve_forever()
+    except KeyboardInterrupt:
+        print("")
+        print("Stoped by the user")
+        httpd.server_close()
