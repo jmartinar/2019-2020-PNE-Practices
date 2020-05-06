@@ -1,23 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:background-color="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8">
-    <title>MAIN PAGE - INITIAL</title>
+    <title>Main page - Initial</title>
   </head>
   <body>
-    <h1>BROWSING HUMAN AND VERTEBRATES GENOME</h1>
-    <p>BASIC LEVEL SERVICES</p>
+    <h1>Browsing Human and Vertebrates genome</h1>
+
+    <b><p style="color:rgb(21,105,150);">BASIC LEVEL</p></b>
+
     <hr>
     <form action="listSpecies" method="get">
-      1)List of species in the genome database
+      1) List of species in the genome database
       <br>
-      Limit:
+      Select limit:
       <input type="text" name="Limit">
       <br>
       <br>
-      <input type="submit" value="SEND">
+      <input type="submit" value="SEND" style="color:rgb(21,105,150);">
     <br>
     </form>
+
     <hr>
     <form action="karyotype" method="get">
       2) Information about the karyotype
@@ -26,12 +29,13 @@
       <input type="text" name="Specie">
       <br>
           <br>
-      <input type="submit" value="SEND">
+      <input type="submit" value="SEND" style="color:rgb(21,105,150);">
     <br>
     </form>
+
     <hr>
   <form action="chromosomeLength" method="get">
-      3) Chromosome length
+      3) Chromosome Length
       <br>
       Select the specie:
       <input type="text" name="Specie">
@@ -40,9 +44,11 @@
       <input type="text" name="Chromosome">
       <br>
       <br>
-      <input type="submit" value="SEND">
+      <input type="submit" value="SEND" style="color:rgb(21,105,150);">
       <br>
     </form>
+
+    <b><p style="color:rgb(225, 141, 27);">MEDIUM LEVEL</p></b>
     <hr>
   <form action="geneSeq" method="get">
       4) Write a gene name for getting its sequence
@@ -50,9 +56,10 @@
       Select the gene:
       <input type="text" name="Gen">
       <br>
-      <input type="submit" value="SEND">
+      <input type="submit" value="SEND" style="color:rgb(225, 141, 27);">
       <br>
     </form>
+
    <hr>
   <form action="geneInfo" method="get">
       5) Write a gene name for getting its information
@@ -60,9 +67,10 @@
       Select the gene:
       <input type="text" name="Gen">
       <br>
-      <input type="submit" value="SEND">
+      <input type="submit" value="SEND" style="color:rgb(225, 141, 27);">
       <br>
     </form>
+
     <hr>
   <form action="geneCalc" method="get">
       6) Write a gene name for getting calculations about its sequence
@@ -70,9 +78,10 @@
       Select the gene:
       <input type="text" name="Gen">
       <br>
-      <input type="submit" value="SEND">
+      <input type="submit" value="SEND" style="color:rgb(225, 141, 27);">
       <br>
     </form>
+
     <hr>
   <form action="geneList" method="get">
       7) Write a chromosome name and an interval within its gene sequence for getting it
@@ -86,9 +95,10 @@
       Select the end:
       <input type="text" name="End">
       <br>
-      <input type="submit" value="SEND">
+      <input type="submit" value="SEND" style="color:rgb(225, 141, 27);">
       <br>
     </form>
+
   <hr>
   </body>
 </html>
