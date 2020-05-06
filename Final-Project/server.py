@@ -137,13 +137,13 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 seq_n = get_value.split('?')  # splits by the ?
                 seq_name, name_sp = seq_n[0].split("=")  # splits by the =
 
-                index = int(index)
                 endpoint = 'info/assembly/'  #stablishes the endpoint and its parameters for the request
                 parameters = '?content-type=application/json'
                 request = endpoint + name_sp + parameters
 
                 try:
                     conn.request("GET", request) #connection request
+                    
                 except ConnectionRefusedError: #exception for connection error
                     print("ERROR! Cannot connect to the Server")
                     exit()
@@ -383,7 +383,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 response = conn.getresponse()
 
                 # -- Read the response's body
-                body = response.read().decode()
+                body = response.read().decode('utf-8')
                 body = json.loads(body) #loads is a json method to read json response
 
 
@@ -405,7 +405,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
                 # -- Read the second response's body
                 second_body = second_response.read().decode()
-                second_body = json.loads(body2)
+                second_body = json.loads(second_body)
 
                 sequence = Seq(second_body["seq"]) #gets the sequence of the gene
 
