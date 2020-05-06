@@ -143,7 +143,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
                 try:
                     conn.request("GET", request) #connection request
-                    
+
                 except ConnectionRefusedError: #exception for connection error
                     print("ERROR! Cannot connect to the Server")
                     exit()
@@ -153,7 +153,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 response = conn.getresponse()
 
                 # -- Read the response's body
-                body = response.read().decode("utf_8") #utf_8 to admit all characters in the response
+                body = response.read().decode("utf-8") #utf_8 to admit all characters in the response
                 karyotype_data = body["karyotype"] #list to save all the names
 
                 for chromosome in karyotype_data: #iteration to print all the chromosomes names
