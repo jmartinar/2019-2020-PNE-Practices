@@ -215,7 +215,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                     if chromo["name"] == str(chromosome):
                         length = chromo["length"]
                         contents = f"""<!DOCTYPE html><html lang = "en"><head><meta charset = "utf-8" ><title> Length Chromosome</title >
-                                        </head ><body  style="background-color:rgb(255,255,182)"><h2> The length of the {chromosome} {specie} chromosome is: {length}</h2><a href="/"> Main page</a"""
+                                        </head ><body  style="background-color:rgb(255,255,182)"><h2 style="color:rgb(21,105,150);"> The length of the '{chromosome}' {specie} chromosome is: {length}</h2><a href="/"> Main page</a"""
 
             # --------------------------------------------gene Seq--------------------------------------------
 
