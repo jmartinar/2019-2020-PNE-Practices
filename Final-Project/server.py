@@ -57,8 +57,11 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                                      <meta charset = "utf-8" >
                                      <title>List of species in the browser</title >
                                     </head >
-                                    <body>
-                                    <p>The total number of species in ensembl is: 267</p>"""
+                                    <body  style="background-color:rgb(255,255,182)">
+                                     <h1 style="color:rgb(21,105,150);"> List of species in the genome database</h1>
+                                     <p style="color:rgb(21,105,150);"><b>The total number of species in ensembl is: 267</b></p>
+                                     <p>The total number of species in ensembl is: 286</p>"""
+                              
 
                 #Get the arguments after the ?
                 get_value = arguments[1]
@@ -101,7 +104,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                                              <meta charset = "utf-8" >
                                              <title>ERROR</title >
                                             </head>
-                                            <body>
+                                            <body  style="background-color:rgb(255,255,182)">
                                             <p>ERROR LIMIT OUT OF RANGE. Introduce a valid limit value</p>
                                             <a href="/">Main page</a></body></html>"""
                 else:
@@ -127,7 +130,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                                     <meta charset = "utf-8">
                                      <title> Karyotype </title >
                                 </head >
-                                <body>
+                                <body  style="background-color:rgb(255,255,182)">
                                 <h2> The names of the chromosomes are:</h2>"""
 
                 # Get the arguments after the ?
@@ -182,7 +185,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                              <meta charset = "utf-8" >
                              <title>ERROR</title >
                             </head>
-                            <body>
+                            <body  style="background-color:rgb(255,255,182)">
                             <p>ERROR INVALID VALUE. Introduce an integer value for chromosome</p>
                             <a href="/">Main page</a></body></html>"""
 
@@ -212,7 +215,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                     if chromo["name"] == str(chromosome):
                         length = chromo["length"]
                         contents = f"""<!DOCTYPE html><html lang = "en"><head><meta charset = "utf-8" ><title> Length Chromosome</title >
-                                        </head ><body><h2> The length of the chromosome is: {length}</h2><a href="/"> Main page</a"""
+                                        </head ><body  style="background-color:rgb(255,255,182)"><h2> The length of the {chromosome} {specie} chromosome is: {length}</h2><a href="/"> Main page</a"""
 
             # --------------------------------------------gene Seq--------------------------------------------
 

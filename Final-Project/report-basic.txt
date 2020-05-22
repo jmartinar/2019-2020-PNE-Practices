@@ -12,29 +12,1367 @@ http://127.0.0.1:8080/listSpecies?limit=1
 * Output:
 <!DOCTYPE html>
 <html lang = "en">
-<head>
-    <meta charset = "utf-8" >
-    <title>List of species in the browser</title >
-</head >
-<body>
-<p>The total number of species in ensembl is: 267</p><p>The number of species you selected are: 1 </p><p>The species are: </p><p> - Hyrax </p><a href="/">Main page</a></body></html>
+   <head>
+      <meta charset = "utf-8" >
+      <title>List of species in the browser</title >
+   </head >
+   <body  style="background-color:rgb(255,255,182)">
+      <h1 style="color:rgb(21,105,150);"> List of species in the genome database</h1>
+      <p style="color:rgb(21,105,150);"><b>The total number of species in ensembl is: 267</b></p>
+      <p>The total number of species in ensembl is: 286</p>
+      <p>The number of species selected are: 1 </p>
+      <p>The species are: </p>
+      <p> - Pig - Rongchang </p>
+      <a href="/">Main page</a>
+   </body>
+</html>
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+* TEST 2:
 
+* Input:
+
+http://127.0.0.1:8080/listSpecies?limit=2
+
+* Output:
+<!DOCTYPE html>
+<html lang = "en">
+   <head>
+      <meta charset = "utf-8" >
+      <title>List of species in the browser</title >
+   </head >
+   <body  style="background-color:rgb(255,255,182)">
+      <h1 style="color:rgb(21,105,150);"> List of species in the genome database</h1>
+      <p style="color:rgb(21,105,150);"><b>The total number of species in ensembl is: 267</b></p>
+      <p>The total number of species in ensembl is: 286</p>
+      <p>The number of species selected are: 2 </p>
+      <p>The species are: </p>
+      <p> - Pig - Rongchang </p>
+      <p> - Pika </p>
+      <a href="/">Main page</a>
+   </body>
+</html>
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+* TEST 3:
+
+* Input:
+
+http://127.0.0.1:8080/listSpecies?limit=12
+
+* Output:
+<!DOCTYPE html>
+<html lang = "en">
+   <head>
+      <meta charset = "utf-8" >
+      <title>List of species in the browser</title >
+   </head >
+   <body  style="background-color:rgb(255,255,182)">
+      <h1 style="color:rgb(21,105,150);"> List of species in the genome database</h1>
+      <p style="color:rgb(21,105,150);"><b>The total number of species in ensembl is: 267</b></p>
+      <p>The total number of species in ensembl is: 286</p>
+      <p>The number of species selected are: 12 </p>
+      <p>The species are: </p>
+      <p> - Mainland tiger snake </p>
+      <p> - Chilean tinamou </p>
+      <p> - Red fox </p>
+      <p> - Sperm whale </p>
+      <p> - Great spotted kiwi </p>
+      <p> - Pinecone soldierfish </p>
+      <p> - Greater bamboo lemur </p>
+      <p> - Kakapo </p>
+      <p> - Lamprey </p>
+      <p> - Gouldian finch </p>
+      <p> - Electric eel </p>
+      <p> - Okarito brown kiwi </p>
+      <a href="/">Main page</a>
+   </body>
+</html>
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+* TEST 4:
+
+* Input:
+
+http://127.0.0.1:8080/listSpecies?limit=29
+
+* Output:
+<!DOCTYPE html>
+<html lang = "en">
+   <head>
+      <meta charset = "utf-8" >
+      <title>List of species in the browser</title >
+   </head >
+   <body  style="background-color:rgb(255,255,182)">
+      <h1 style="color:rgb(21,105,150);"> List of species in the genome database</h1>
+      <p style="color:rgb(21,105,150);"><b>The total number of species in ensembl is: 267</b></p>
+      <p>The total number of species in ensembl is: 286</p>
+      <p>The number of species selected are: 29 </p>
+      <p>The species are: </p>
+      <p> - Pig - Rongchang </p>
+      <p> - Pika </p>
+      <p> - African ostrich </p>
+      <p> - Nile tilapia </p>
+      <p> - Channel catfish </p>
+      <p> - West African mud turtle </p>
+      <p> - Channel bull blenny </p>
+      <p> - Sooty mangabey </p>
+      <p> - Dolphin </p>
+      <p> - Naked mole-rat male </p>
+      <p> - Brown trout </p>
+      <p> - Eastern brown snake </p>
+      <p> - Mouse CAST/EiJ </p>
+      <p> - Spiny chromis </p>
+      <p> - Gorilla </p>
+      <p> - Silver-eye </p>
+      <p> - Sloth </p>
+      <p> - Eurasian sparrowhawk </p>
+      <p> - Mouse AKR/J </p>
+      <p> - Sailfin molly </p>
+      <p> - Greater bamboo lemur </p>
+      <p> - Mangrove rivulus </p>
+      <p> - Platypus </p>
+      <p> - Live sharksucker </p>
+      <p> - Megabat </p>
+      <p> - Mouse NOD/ShiLtJ </p>
+      <p> - Ferret </p>
+      <p> - Coelacanth </p>
+      <p> - Lion </p>
+      <a href="/">Main page</a>
+   </body>
+</html>
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+* TEST 5:
+
+* Input:
+
+http://127.0.0.1:8080/listSpecies?limit=50
+
+* Output:
+<!DOCTYPE html>
+<html lang = "en">
+   <head>
+      <meta charset = "utf-8" >
+      <title>List of species in the browser</title >
+   </head >
+   <body  style="background-color:rgb(255,255,182)">
+      <h1 style="color:rgb(21,105,150);"> List of species in the genome database</h1>
+      <p style="color:rgb(21,105,150);"><b>The total number of species in ensembl is: 267</b></p>
+      <p>The total number of species in ensembl is: 286</p>
+      <p>The number of species selected are: 50 </p>
+      <p>The species are: </p>
+      <p> - Mainland tiger snake </p>
+      <p> - Chilean tinamou </p>
+      <p> - Red fox </p>
+      <p> - Sperm whale </p>
+      <p> - Great spotted kiwi </p>
+      <p> - Pinecone soldierfish </p>
+      <p> - Greater bamboo lemur </p>
+      <p> - Kakapo </p>
+      <p> - Lamprey </p>
+      <p> - Gouldian finch </p>
+      <p> - Electric eel </p>
+      <p> - Okarito brown kiwi </p>
+      <p> - Large yellow croaker </p>
+      <p> - Channel bull blenny </p>
+      <p> - Mouse NZO/HlLtJ </p>
+      <p> - Zebrafish </p>
+      <p> - Common carp huanghe </p>
+      <p> - Mouse A/J </p>
+      <p> - Pig - Wuzhishan </p>
+      <p> - Horned golden-line barbel </p>
+      <p> - Tree Shrew </p>
+      <p> - Marmoset </p>
+      <p> - Spotted gar </p>
+      <p> - Tiger </p>
+      <p> - Goat </p>
+      <p> - Central bearded dragon </p>
+      <p> - Naked mole-rat female </p>
+      <p> - American black bear </p>
+      <p> - Tetraodon </p>
+      <p> - Meerkat </p>
+      <p> - Steppe mouse </p>
+      <p> - Lyretail cichlid </p>
+      <p> - Mangrove rivulus </p>
+      <p> - Gorilla </p>
+      <p> - Sheep </p>
+      <p> - Bicolor damselfish </p>
+      <p> - Coelacanth </p>
+      <p> - Midas cichlid </p>
+      <p> - Ma's night monkey </p>
+      <p> - Pachon cavefish </p>
+      <p> - Common wombat </p>
+      <p> - Blue-ringed sea krait </p>
+      <p> - Gilthead seabream </p>
+      <p> - Indian peafowl </p>
+      <p> - Pig-tailed macaque </p>
+      <p> - American beaver </p>
+      <p> - Pig - Jinhua </p>
+      <p> - Duck </p>
+      <p> - Shrew mouse </p>
+      <p> - Western mosquitofish </p>
+      <a href="/">Main page</a>
+   </body>
+</html>
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+* TEST 6:
+
+* Input:
+
+http://127.0.0.1:8080/listSpecies?limit=100
+
+* Output:
+<!DOCTYPE html>
+<html lang = "en">
+   <head>
+      <meta charset = "utf-8" >
+      <title>List of species in the browser</title >
+   </head >
+   <body  style="background-color:rgb(255,255,182)">
+      <h1 style="color:rgb(21,105,150);"> List of species in the genome database</h1>
+      <p style="color:rgb(21,105,150);"><b>The total number of species in ensembl is: 267</b></p>
+      <p>The total number of species in ensembl is: 286</p>
+      <p>The number of species selected are: 100 </p>
+      <p>The species are: </p>
+      <p> - Pig - Rongchang </p>
+      <p> - Pika </p>
+      <p> - African ostrich </p>
+      <p> - Nile tilapia </p>
+      <p> - Channel catfish </p>
+      <p> - West African mud turtle </p>
+      <p> - Channel bull blenny </p>
+      <p> - Sooty mangabey </p>
+      <p> - Dolphin </p>
+      <p> - Naked mole-rat male </p>
+      <p> - Brown trout </p>
+      <p> - Eastern brown snake </p>
+      <p> - Mouse CAST/EiJ </p>
+      <p> - Spiny chromis </p>
+      <p> - Gorilla </p>
+      <p> - Silver-eye </p>
+      <p> - Sloth </p>
+      <p> - Eurasian sparrowhawk </p>
+      <p> - Mouse AKR/J </p>
+      <p> - Sailfin molly </p>
+      <p> - Greater bamboo lemur </p>
+      <p> - Mangrove rivulus </p>
+      <p> - Platypus </p>
+      <p> - Live sharksucker </p>
+      <p> - Megabat </p>
+      <p> - Mouse NOD/ShiLtJ </p>
+      <p> - Ferret </p>
+      <p> - Coelacanth </p>
+      <p> - Lion </p>
+      <p> - Siamese fighting fish </p>
+      <p> - Pig - Wuzhishan </p>
+      <p> - Brazilian guinea pig </p>
+      <p> - Sheepshead minnow </p>
+      <p> - Beluga whale </p>
+      <p> - Domestic yak </p>
+      <p> - Orbiculate cardinalfish </p>
+      <p> - Chinese hamster CHOK1GS </p>
+      <p> - Kakapo </p>
+      <p> - Orangutan </p>
+      <p> - Daurian ground squirrel </p>
+      <p> - Pig - Bamei </p>
+      <p> - Mouse BALB/cJ </p>
+      <p> - Common carp huanghe </p>
+      <p> - Three-toed box turtle </p>
+      <p> - Tongue sole </p>
+      <p> - Chimpanzee </p>
+      <p> - Ma's night monkey </p>
+      <p> - Red-bellied piranha </p>
+      <p> - Pig - Tibetan </p>
+      <p> - Drill </p>
+      <p> - Anole lizard </p>
+      <p> - Duck </p>
+      <p> - Common carp german mirror </p>
+      <p> - Chilean tinamou </p>
+      <p> - Marmoset </p>
+      <p> - Chinese medaka </p>
+      <p> - Greater amberjack </p>
+      <p> - Mouse </p>
+      <p> - Dark-eyed junco </p>
+      <p> - Mouse DBA/2J </p>
+      <p> - Arctic ground squirrel </p>
+      <p> - Pig </p>
+      <p> - Mallard </p>
+      <p> - Dog - Great Dane </p>
+      <p> - Great Tit </p>
+      <p> - Pig - Pietrain </p>
+      <p> - Mainland tiger snake </p>
+      <p> - Pig - Jinhua </p>
+      <p> - Lesser hedgehog tenrec </p>
+      <p> - Climbing perch </p>
+      <p> - Tuatara </p>
+      <p> - Wild yak </p>
+      <p> - Bushbaby </p>
+      <p> - Degu </p>
+      <p> - Siberian musk deer </p>
+      <p> - Northern pike </p>
+      <p> - Pig - Meishan </p>
+      <p> - Gilthead seabream </p>
+      <p> - Kangaroo rat </p>
+      <p> - Ring-necked pheasant </p>
+      <p> - Mummichog </p>
+      <p> - American mink </p>
+      <p> - Tasmanian devil </p>
+      <p> - Horned golden-line barbel </p>
+      <p> - Shrew mouse </p>
+      <p> - Golden Hamster </p>
+      <p> - Pachon cavefish </p>
+      <p> - Mouse PWK/PhJ </p>
+      <p> - Hybrid - Bos Taurus </p>
+      <p> - Canada lynx </p>
+      <p> - Wallaby </p>
+      <p> - Argentine black and white tegu </p>
+      <p> - Monterrey platyfish </p>
+      <p> - Blue tit </p>
+      <p> - Japanese quail </p>
+      <p> - Microbat </p>
+      <p> - Panda </p>
+      <p> - Chinook salmon </p>
+      <p> - Hedgehog </p>
+      <p> - Ryukyu mouse </p>
+      <a href="/">Main page</a>
+   </body>
+</html>
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+* TEST 7:
+
+* Input:
+
+http://127.0.0.1:8080/listSpecies?limit=150
+
+* Output:
+<!DOCTYPE html>
+<html lang = "en">
+   <head>
+      <meta charset = "utf-8" >
+      <title>List of species in the browser</title >
+   </head >
+   <body  style="background-color:rgb(255,255,182)">
+      <h1 style="color:rgb(21,105,150);"> List of species in the genome database</h1>
+      <p style="color:rgb(21,105,150);"><b>The total number of species in ensembl is: 267</b></p>
+      <p>The total number of species in ensembl is: 286</p>
+      <p>The number of species selected are: 150 </p>
+      <p>The species are: </p>
+      <p> - Mainland tiger snake </p>
+      <p> - Chilean tinamou </p>
+      <p> - Red fox </p>
+      <p> - Sperm whale </p>
+      <p> - Great spotted kiwi </p>
+      <p> - Pinecone soldierfish </p>
+      <p> - Greater bamboo lemur </p>
+      <p> - Kakapo </p>
+      <p> - Lamprey </p>
+      <p> - Gouldian finch </p>
+      <p> - Electric eel </p>
+      <p> - Okarito brown kiwi </p>
+      <p> - Large yellow croaker </p>
+      <p> - Channel bull blenny </p>
+      <p> - Mouse NZO/HlLtJ </p>
+      <p> - Zebrafish </p>
+      <p> - Common carp huanghe </p>
+      <p> - Mouse A/J </p>
+      <p> - Pig - Wuzhishan </p>
+      <p> - Horned golden-line barbel </p>
+      <p> - Tree Shrew </p>
+      <p> - Marmoset </p>
+      <p> - Spotted gar </p>
+      <p> - Tiger </p>
+      <p> - Goat </p>
+      <p> - Central bearded dragon </p>
+      <p> - Naked mole-rat female </p>
+      <p> - American black bear </p>
+      <p> - Tetraodon </p>
+      <p> - Meerkat </p>
+      <p> - Steppe mouse </p>
+      <p> - Lyretail cichlid </p>
+      <p> - Mangrove rivulus </p>
+      <p> - Gorilla </p>
+      <p> - Sheep </p>
+      <p> - Bicolor damselfish </p>
+      <p> - Coelacanth </p>
+      <p> - Midas cichlid </p>
+      <p> - Ma's night monkey </p>
+      <p> - Pachon cavefish </p>
+      <p> - Common wombat </p>
+      <p> - Blue-ringed sea krait </p>
+      <p> - Gilthead seabream </p>
+      <p> - Indian peafowl </p>
+      <p> - Pig-tailed macaque </p>
+      <p> - American beaver </p>
+      <p> - Pig - Jinhua </p>
+      <p> - Duck </p>
+      <p> - Shrew mouse </p>
+      <p> - Western mosquitofish </p>
+      <p> - Agassiz's desert tortoise </p>
+      <p> - Helmeted guineafowl </p>
+      <p> - Amazon molly </p>
+      <p> - Chinese hamster CHOK1GS </p>
+      <p> - Orangutan </p>
+      <p> - Olive baboon </p>
+      <p> - Orbiculate cardinalfish </p>
+      <p> - Zebra mbuna </p>
+      <p> - Elephant </p>
+      <p> - American mink </p>
+      <p> - Guinea Pig </p>
+      <p> - Platypus </p>
+      <p> - Capuchin </p>
+      <p> - Golden-collared manakin </p>
+      <p> - Three-toed box turtle </p>
+      <p> - Prairie vole </p>
+      <p> - Tropical clawed frog </p>
+      <p> - Common carp </p>
+      <p> - Blue tilapia </p>
+      <p> - Flycatcher </p>
+      <p> - Pig - Bamei </p>
+      <p> - Spoon-billed sandpiper </p>
+      <p> - African ostrich </p>
+      <p> - Periophthalmus magnuspinnatus </p>
+      <p> - Chinese softshell turtle </p>
+      <p> - Asiatic black bear </p>
+      <p> - Reedfish </p>
+      <p> - Tarsier </p>
+      <p> - Clown anemonefish </p>
+      <p> - Huchen </p>
+      <p> - Horse </p>
+      <p> - Pig - Landrace </p>
+      <p> - Chinese hamster PICR </p>
+      <p> - Mouse </p>
+      <p> - Mexican tetra </p>
+      <p> - Lesser hedgehog tenrec </p>
+      <p> - Jewelled blenny </p>
+      <p> - Tongue sole </p>
+      <p> - Mouse 129S1/SvImJ </p>
+      <p> - Leopard </p>
+      <p> - Live sharksucker </p>
+      <p> - Great Tit </p>
+      <p> - Northern pike </p>
+      <p> - Yellowtail amberjack </p>
+      <p> - Ruff </p>
+      <p> - Alpaca </p>
+      <p> - Mouse Lemur </p>
+      <p> - Ugandan red Colobus </p>
+      <p> - Human </p>
+      <p> - Mouse BALB/cJ </p>
+      <p> - Pig - Rongchang </p>
+      <p> - Drill </p>
+      <p> - Burton's mouthbrooder </p>
+      <p> - Lion </p>
+      <p> - Burrowing owl </p>
+      <p> - Hyrax </p>
+      <p> - Indian glassy fish </p>
+      <p> - Gelada </p>
+      <p> - Mouse FVB/NJ </p>
+      <p> - Budgerigar </p>
+      <p> - Japanese medaka HNI </p>
+      <p> - Chacoan peccary </p>
+      <p> - Pink-footed goose </p>
+      <p> - Tiger tail seahorse </p>
+      <p> - Mouse CBA/J </p>
+      <p> - Turbot </p>
+      <p> - Opossum </p>
+      <p> - Greater horseshoe bat </p>
+      <p> - Paramormyrops kingsleyae </p>
+      <p> - Blind barbel </p>
+      <p> - Rufous-capped babbler </p>
+      <p> - Komodo dragon </p>
+      <p> - Saccharomyces cerevisiae </p>
+      <p> - Monterrey platyfish </p>
+      <p> - Beluga whale </p>
+      <p> - Painted turtle </p>
+      <p> - Japanese medaka HSOK </p>
+      <p> - Mouse NOD/ShiLtJ </p>
+      <p> - Angola colobus </p>
+      <p> - Golden Hamster </p>
+      <p> - Spiny chromis </p>
+      <p> - Naked mole-rat male </p>
+      <p> - Makobe Island cichlid </p>
+      <p> - Dog - Basenji </p>
+      <p> - Fugu </p>
+      <p> - Golden pheasant </p>
+      <p> - Crab-eating macaque </p>
+      <p> - Koala </p>
+      <p> - Mouse DBA/2J </p>
+      <p> - Nile tilapia </p>
+      <p> - Ring-necked pheasant </p>
+      <p> - Kangaroo rat </p>
+      <p> - Megabat </p>
+      <p> - Caenorhabditis elegans </p>
+      <p> - Alpine marmot </p>
+      <p> - Mallard </p>
+      <p> - Mouse PWK/PhJ </p>
+      <p> - Hybrid - Bos Indicus </p>
+      <p> - Mouse C57BL/6NJ </p>
+      <p> - Round goby </p>
+      <a href="/">Main page</a>
+   </body>
+</html>
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+* TEST 8:
+
+* Input:
+
+http://127.0.0.1:8080/listSpecies?limit=200
+
+* Output:
+<!DOCTYPE html>
+<html lang = "en">
+   <head>
+      <meta charset = "utf-8" >
+      <title>List of species in the browser</title >
+   </head >
+   <body  style="background-color:rgb(255,255,182)">
+      <h1 style="color:rgb(21,105,150);"> List of species in the genome database</h1>
+      <p style="color:rgb(21,105,150);"><b>The total number of species in ensembl is: 267</b></p>
+      <p>The total number of species in ensembl is: 286</p>
+      <p>The number of species selected are: 200 </p>
+      <p>The species are: </p>
+      <p> - Mainland tiger snake </p>
+      <p> - Chilean tinamou </p>
+      <p> - Red fox </p>
+      <p> - Sperm whale </p>
+      <p> - Great spotted kiwi </p>
+      <p> - Pinecone soldierfish </p>
+      <p> - Greater bamboo lemur </p>
+      <p> - Kakapo </p>
+      <p> - Lamprey </p>
+      <p> - Gouldian finch </p>
+      <p> - Electric eel </p>
+      <p> - Okarito brown kiwi </p>
+      <p> - Large yellow croaker </p>
+      <p> - Channel bull blenny </p>
+      <p> - Mouse NZO/HlLtJ </p>
+      <p> - Zebrafish </p>
+      <p> - Common carp huanghe </p>
+      <p> - Mouse A/J </p>
+      <p> - Pig - Wuzhishan </p>
+      <p> - Horned golden-line barbel </p>
+      <p> - Tree Shrew </p>
+      <p> - Marmoset </p>
+      <p> - Spotted gar </p>
+      <p> - Tiger </p>
+      <p> - Goat </p>
+      <p> - Central bearded dragon </p>
+      <p> - Naked mole-rat female </p>
+      <p> - American black bear </p>
+      <p> - Tetraodon </p>
+      <p> - Meerkat </p>
+      <p> - Steppe mouse </p>
+      <p> - Lyretail cichlid </p>
+      <p> - Mangrove rivulus </p>
+      <p> - Gorilla </p>
+      <p> - Sheep </p>
+      <p> - Bicolor damselfish </p>
+      <p> - Coelacanth </p>
+      <p> - Midas cichlid </p>
+      <p> - Ma's night monkey </p>
+      <p> - Pachon cavefish </p>
+      <p> - Common wombat </p>
+      <p> - Blue-ringed sea krait </p>
+      <p> - Gilthead seabream </p>
+      <p> - Indian peafowl </p>
+      <p> - Pig-tailed macaque </p>
+      <p> - American beaver </p>
+      <p> - Pig - Jinhua </p>
+      <p> - Duck </p>
+      <p> - Shrew mouse </p>
+      <p> - Western mosquitofish </p>
+      <p> - Agassiz's desert tortoise </p>
+      <p> - Helmeted guineafowl </p>
+      <p> - Amazon molly </p>
+      <p> - Chinese hamster CHOK1GS </p>
+      <p> - Orangutan </p>
+      <p> - Olive baboon </p>
+      <p> - Orbiculate cardinalfish </p>
+      <p> - Zebra mbuna </p>
+      <p> - Elephant </p>
+      <p> - American mink </p>
+      <p> - Guinea Pig </p>
+      <p> - Platypus </p>
+      <p> - Capuchin </p>
+      <p> - Golden-collared manakin </p>
+      <p> - Three-toed box turtle </p>
+      <p> - Prairie vole </p>
+      <p> - Tropical clawed frog </p>
+      <p> - Common carp </p>
+      <p> - Blue tilapia </p>
+      <p> - Flycatcher </p>
+      <p> - Pig - Bamei </p>
+      <p> - Spoon-billed sandpiper </p>
+      <p> - African ostrich </p>
+      <p> - Periophthalmus magnuspinnatus </p>
+      <p> - Chinese softshell turtle </p>
+      <p> - Asiatic black bear </p>
+      <p> - Reedfish </p>
+      <p> - Tarsier </p>
+      <p> - Clown anemonefish </p>
+      <p> - Huchen </p>
+      <p> - Horse </p>
+      <p> - Pig - Landrace </p>
+      <p> - Chinese hamster PICR </p>
+      <p> - Mouse </p>
+      <p> - Mexican tetra </p>
+      <p> - Lesser hedgehog tenrec </p>
+      <p> - Jewelled blenny </p>
+      <p> - Tongue sole </p>
+      <p> - Mouse 129S1/SvImJ </p>
+      <p> - Leopard </p>
+      <p> - Live sharksucker </p>
+      <p> - Great Tit </p>
+      <p> - Northern pike </p>
+      <p> - Yellowtail amberjack </p>
+      <p> - Ruff </p>
+      <p> - Alpaca </p>
+      <p> - Mouse Lemur </p>
+      <p> - Ugandan red Colobus </p>
+      <p> - Human </p>
+      <p> - Mouse BALB/cJ </p>
+      <p> - Pig - Rongchang </p>
+      <p> - Drill </p>
+      <p> - Burton's mouthbrooder </p>
+      <p> - Lion </p>
+      <p> - Burrowing owl </p>
+      <p> - Hyrax </p>
+      <p> - Indian glassy fish </p>
+      <p> - Gelada </p>
+      <p> - Mouse FVB/NJ </p>
+      <p> - Budgerigar </p>
+      <p> - Japanese medaka HNI </p>
+      <p> - Chacoan peccary </p>
+      <p> - Pink-footed goose </p>
+      <p> - Tiger tail seahorse </p>
+      <p> - Mouse CBA/J </p>
+      <p> - Turbot </p>
+      <p> - Opossum </p>
+      <p> - Greater horseshoe bat </p>
+      <p> - Paramormyrops kingsleyae </p>
+      <p> - Blind barbel </p>
+      <p> - Rufous-capped babbler </p>
+      <p> - Komodo dragon </p>
+      <p> - Saccharomyces cerevisiae </p>
+      <p> - Monterrey platyfish </p>
+      <p> - Beluga whale </p>
+      <p> - Painted turtle </p>
+      <p> - Japanese medaka HSOK </p>
+      <p> - Mouse NOD/ShiLtJ </p>
+      <p> - Angola colobus </p>
+      <p> - Golden Hamster </p>
+      <p> - Spiny chromis </p>
+      <p> - Naked mole-rat male </p>
+      <p> - Makobe Island cichlid </p>
+      <p> - Dog - Basenji </p>
+      <p> - Fugu </p>
+      <p> - Golden pheasant </p>
+      <p> - Crab-eating macaque </p>
+      <p> - Koala </p>
+      <p> - Mouse DBA/2J </p>
+      <p> - Nile tilapia </p>
+      <p> - Ring-necked pheasant </p>
+      <p> - Kangaroo rat </p>
+      <p> - Megabat </p>
+      <p> - Caenorhabditis elegans </p>
+      <p> - Alpine marmot </p>
+      <p> - Mallard </p>
+      <p> - Mouse PWK/PhJ </p>
+      <p> - Hybrid - Bos Indicus </p>
+      <p> - Mouse C57BL/6NJ </p>
+      <p> - Round goby </p>
+      <p> - Siamese fighting fish </p>
+      <p> - Polar bear </p>
+      <p> - Brazilian guinea pig </p>
+      <p> - Sooty mangabey </p>
+      <p> - Pig - Tibetan </p>
+      <p> - Lesser Egyptian jerboa </p>
+      <p> - Javanese ricefish </p>
+      <p> - Common wall lizard </p>
+      <p> - Rabbit </p>
+      <p> - Chimpanzee </p>
+      <p> - Siberian musk deer </p>
+      <p> - Dingo </p>
+      <p> - Bolivian squirrel monkey </p>
+      <p> - Long-tailed chinchilla </p>
+      <p> - Drosophila melanogaster </p>
+      <p> - Eastern brown snake </p>
+      <p> - Pig - Largewhite </p>
+      <p> - Australian saltwater crocodile </p>
+      <p> - Anole lizard </p>
+      <p> - Shortfin molly </p>
+      <p> - Wallaby </p>
+      <p> - Atlantic salmon </p>
+      <p> - Domestic yak </p>
+      <p> - Chinese medaka </p>
+      <p> - Rat </p>
+      <p> - Sheepshead minnow </p>
+      <p> - Bushbaby </p>
+      <p> - Eastern happy </p>
+      <p> - Blue tit </p>
+      <p> - Algerian mouse </p>
+      <p> - Pig - Meishan </p>
+      <p> - Atlantic herring </p>
+      <p> - Japanese quail </p>
+      <p> - Dog - Great Dane </p>
+      <p> - Little spotted kiwi </p>
+      <p> - Canada lynx </p>
+      <p> - Swamp eel </p>
+      <p> - Platyfish </p>
+      <p> - Microbat </p>
+      <p> - West African mud turtle </p>
+      <p> - Armadillo </p>
+      <p> - Greater amberjack </p>
+      <p> - Eurasian sparrowhawk </p>
+      <p> - Goodes thornscrub tortoise </p>
+      <p> - American bison </p>
+      <p> - Brown trout </p>
+      <p> - Argentine black and white tegu </p>
+      <p> - Mouse C3H/HeJ </p>
+      <p> - Damara mole rat </p>
+      <p> - Cow </p>
+      <a href="/">Main page</a>
+   </body>
+</html>
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+* TEST 9:
+
+* Input:
+
+http://127.0.0.1:8080/listSpecies?limit=250
+
+* Output:
+<!DOCTYPE html>
+<html lang = "en">
+   <head>
+      <meta charset = "utf-8" >
+      <title>List of species in the browser</title >
+   </head >
+   <body  style="background-color:rgb(255,255,182)">
+      <h1 style="color:rgb(21,105,150);"> List of species in the genome database</h1>
+      <p style="color:rgb(21,105,150);"><b>The total number of species in ensembl is: 267</b></p>
+      <p>The total number of species in ensembl is: 286</p>
+      <p>The number of species selected are: 250 </p>
+      <p>The species are: </p>
+      <p> - Mainland tiger snake </p>
+      <p> - Chilean tinamou </p>
+      <p> - Red fox </p>
+      <p> - Sperm whale </p>
+      <p> - Great spotted kiwi </p>
+      <p> - Pinecone soldierfish </p>
+      <p> - Greater bamboo lemur </p>
+      <p> - Kakapo </p>
+      <p> - Lamprey </p>
+      <p> - Gouldian finch </p>
+      <p> - Electric eel </p>
+      <p> - Okarito brown kiwi </p>
+      <p> - Large yellow croaker </p>
+      <p> - Channel bull blenny </p>
+      <p> - Mouse NZO/HlLtJ </p>
+      <p> - Zebrafish </p>
+      <p> - Common carp huanghe </p>
+      <p> - Mouse A/J </p>
+      <p> - Pig - Wuzhishan </p>
+      <p> - Horned golden-line barbel </p>
+      <p> - Tree Shrew </p>
+      <p> - Marmoset </p>
+      <p> - Spotted gar </p>
+      <p> - Tiger </p>
+      <p> - Goat </p>
+      <p> - Central bearded dragon </p>
+      <p> - Naked mole-rat female </p>
+      <p> - American black bear </p>
+      <p> - Tetraodon </p>
+      <p> - Meerkat </p>
+      <p> - Steppe mouse </p>
+      <p> - Lyretail cichlid </p>
+      <p> - Mangrove rivulus </p>
+      <p> - Gorilla </p>
+      <p> - Sheep </p>
+      <p> - Bicolor damselfish </p>
+      <p> - Coelacanth </p>
+      <p> - Midas cichlid </p>
+      <p> - Ma's night monkey </p>
+      <p> - Pachon cavefish </p>
+      <p> - Common wombat </p>
+      <p> - Blue-ringed sea krait </p>
+      <p> - Gilthead seabream </p>
+      <p> - Indian peafowl </p>
+      <p> - Pig-tailed macaque </p>
+      <p> - American beaver </p>
+      <p> - Pig - Jinhua </p>
+      <p> - Duck </p>
+      <p> - Shrew mouse </p>
+      <p> - Western mosquitofish </p>
+      <p> - Agassiz's desert tortoise </p>
+      <p> - Helmeted guineafowl </p>
+      <p> - Amazon molly </p>
+      <p> - Chinese hamster CHOK1GS </p>
+      <p> - Orangutan </p>
+      <p> - Olive baboon </p>
+      <p> - Orbiculate cardinalfish </p>
+      <p> - Zebra mbuna </p>
+      <p> - Elephant </p>
+      <p> - American mink </p>
+      <p> - Guinea Pig </p>
+      <p> - Platypus </p>
+      <p> - Capuchin </p>
+      <p> - Golden-collared manakin </p>
+      <p> - Three-toed box turtle </p>
+      <p> - Prairie vole </p>
+      <p> - Tropical clawed frog </p>
+      <p> - Common carp </p>
+      <p> - Blue tilapia </p>
+      <p> - Flycatcher </p>
+      <p> - Pig - Bamei </p>
+      <p> - Spoon-billed sandpiper </p>
+      <p> - African ostrich </p>
+      <p> - Periophthalmus magnuspinnatus </p>
+      <p> - Chinese softshell turtle </p>
+      <p> - Asiatic black bear </p>
+      <p> - Reedfish </p>
+      <p> - Tarsier </p>
+      <p> - Clown anemonefish </p>
+      <p> - Huchen </p>
+      <p> - Horse </p>
+      <p> - Pig - Landrace </p>
+      <p> - Chinese hamster PICR </p>
+      <p> - Mouse </p>
+      <p> - Mexican tetra </p>
+      <p> - Lesser hedgehog tenrec </p>
+      <p> - Jewelled blenny </p>
+      <p> - Tongue sole </p>
+      <p> - Mouse 129S1/SvImJ </p>
+      <p> - Leopard </p>
+      <p> - Live sharksucker </p>
+      <p> - Great Tit </p>
+      <p> - Northern pike </p>
+      <p> - Yellowtail amberjack </p>
+      <p> - Ruff </p>
+      <p> - Alpaca </p>
+      <p> - Mouse Lemur </p>
+      <p> - Ugandan red Colobus </p>
+      <p> - Human </p>
+      <p> - Mouse BALB/cJ </p>
+      <p> - Pig - Rongchang </p>
+      <p> - Drill </p>
+      <p> - Burton's mouthbrooder </p>
+      <p> - Lion </p>
+      <p> - Burrowing owl </p>
+      <p> - Hyrax </p>
+      <p> - Indian glassy fish </p>
+      <p> - Gelada </p>
+      <p> - Mouse FVB/NJ </p>
+      <p> - Budgerigar </p>
+      <p> - Japanese medaka HNI </p>
+      <p> - Chacoan peccary </p>
+      <p> - Pink-footed goose </p>
+      <p> - Tiger tail seahorse </p>
+      <p> - Mouse CBA/J </p>
+      <p> - Turbot </p>
+      <p> - Opossum </p>
+      <p> - Greater horseshoe bat </p>
+      <p> - Paramormyrops kingsleyae </p>
+      <p> - Blind barbel </p>
+      <p> - Rufous-capped babbler </p>
+      <p> - Komodo dragon </p>
+      <p> - Saccharomyces cerevisiae </p>
+      <p> - Monterrey platyfish </p>
+      <p> - Beluga whale </p>
+      <p> - Painted turtle </p>
+      <p> - Japanese medaka HSOK </p>
+      <p> - Mouse NOD/ShiLtJ </p>
+      <p> - Angola colobus </p>
+      <p> - Golden Hamster </p>
+      <p> - Spiny chromis </p>
+      <p> - Naked mole-rat male </p>
+      <p> - Makobe Island cichlid </p>
+      <p> - Dog - Basenji </p>
+      <p> - Fugu </p>
+      <p> - Golden pheasant </p>
+      <p> - Crab-eating macaque </p>
+      <p> - Koala </p>
+      <p> - Mouse DBA/2J </p>
+      <p> - Nile tilapia </p>
+      <p> - Ring-necked pheasant </p>
+      <p> - Kangaroo rat </p>
+      <p> - Megabat </p>
+      <p> - Caenorhabditis elegans </p>
+      <p> - Alpine marmot </p>
+      <p> - Mallard </p>
+      <p> - Mouse PWK/PhJ </p>
+      <p> - Hybrid - Bos Indicus </p>
+      <p> - Mouse C57BL/6NJ </p>
+      <p> - Round goby </p>
+      <p> - Siamese fighting fish </p>
+      <p> - Polar bear </p>
+      <p> - Brazilian guinea pig </p>
+      <p> - Sooty mangabey </p>
+      <p> - Pig - Tibetan </p>
+      <p> - Lesser Egyptian jerboa </p>
+      <p> - Javanese ricefish </p>
+      <p> - Common wall lizard </p>
+      <p> - Rabbit </p>
+      <p> - Chimpanzee </p>
+      <p> - Siberian musk deer </p>
+      <p> - Dingo </p>
+      <p> - Bolivian squirrel monkey </p>
+      <p> - Long-tailed chinchilla </p>
+      <p> - Drosophila melanogaster </p>
+      <p> - Eastern brown snake </p>
+      <p> - Pig - Largewhite </p>
+      <p> - Australian saltwater crocodile </p>
+      <p> - Anole lizard </p>
+      <p> - Shortfin molly </p>
+      <p> - Wallaby </p>
+      <p> - Atlantic salmon </p>
+      <p> - Domestic yak </p>
+      <p> - Chinese medaka </p>
+      <p> - Rat </p>
+      <p> - Sheepshead minnow </p>
+      <p> - Bushbaby </p>
+      <p> - Eastern happy </p>
+      <p> - Blue tit </p>
+      <p> - Algerian mouse </p>
+      <p> - Pig - Meishan </p>
+      <p> - Atlantic herring </p>
+      <p> - Japanese quail </p>
+      <p> - Dog - Great Dane </p>
+      <p> - Little spotted kiwi </p>
+      <p> - Canada lynx </p>
+      <p> - Swamp eel </p>
+      <p> - Platyfish </p>
+      <p> - Microbat </p>
+      <p> - West African mud turtle </p>
+      <p> - Armadillo </p>
+      <p> - Greater amberjack </p>
+      <p> - Eurasian sparrowhawk </p>
+      <p> - Goodes thornscrub tortoise </p>
+      <p> - American bison </p>
+      <p> - Brown trout </p>
+      <p> - Argentine black and white tegu </p>
+      <p> - Mouse C3H/HeJ </p>
+      <p> - Damara mole rat </p>
+      <p> - Cow </p>
+      <p> - Macaque </p>
+      <p> - Golden-line barbel </p>
+      <p> - Japanese medaka HdrR </p>
+      <p> - Black snub-nosed monkey </p>
+      <p> - Blunt-snouted clingfish </p>
+      <p> - Elephant shark </p>
+      <p> - Northern American deer mouse </p>
+      <p> - Pig USMARC </p>
+      <p> - Barramundi perch </p>
+      <p> - Common carp german mirror </p>
+      <p> - Hedgehog </p>
+      <p> - Squirrel </p>
+      <p> - Degu </p>
+      <p> - Yellow-billed parrot </p>
+      <p> - Medium ground-finch </p>
+      <p> - Golden eagle </p>
+      <p> - Climbing perch </p>
+      <p> - Turkey </p>
+      <p> - Abingdon island giant tortoise </p>
+      <p> - Mouse WSB/EiJ </p>
+      <p> - Tasmanian devil </p>
+      <p> - Common canary </p>
+      <p> - Mummichog </p>
+      <p> - Panda </p>
+      <p> - Gibbon </p>
+      <p> - Zebra finch </p>
+      <p> - Goldfish </p>
+      <p> - White-throated sparrow </p>
+      <p> - Dark-eyed junco </p>
+      <p> - Guppy </p>
+      <p> - Zig-zag eel </p>
+      <p> - Chinese hamster CriGri </p>
+      <p> - Upper Galilee mountains blind mole rat </p>
+      <p> - Pig </p>
+      <p> - Mouse AKR/J </p>
+      <p> - Bonobo </p>
+      <p> - Dog </p>
+      <p> - Ocean sunfish </p>
+      <p> - Small tree finch </p>
+      <p> - C.savignyi </p>
+      <p> - Rainbow trout </p>
+      <p> - Mongolian gerbil </p>
+      <p> - Chicken </p>
+      <p> - Blue-crowned manakin </p>
+      <p> - Daurian ground squirrel </p>
+      <p> - Wild yak </p>
+      <p> - Coquerel's sifaka </p>
+      <p> - Vervet-AGM </p>
+      <p> - Stickleback </p>
+      <p> - Hagfish </p>
+      <a href="/">Main page</a>
+   </body>
+</html>
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+* TEST 10:
+
+* Input:
+
+http://127.0.0.1:8080/listSpecies?limit=286
+
+* Output:
+<!DOCTYPE html>
+<html lang = "en">
+   <head>
+      <meta charset = "utf-8" >
+      <title>List of species in the browser</title >
+   </head >
+   <body  style="background-color:rgb(255,255,182)">
+      <h1 style="color:rgb(21,105,150);"> List of species in the genome database</h1>
+      <p style="color:rgb(21,105,150);"><b>The total number of species in ensembl is: 267</b></p>
+      <p>The total number of species in ensembl is: 286</p>
+      <p>The number of species selected are: 286 </p>
+      <p>The species are: </p>
+      <p> - Pig - Rongchang </p>
+      <p> - Pika </p>
+      <p> - African ostrich </p>
+      <p> - Nile tilapia </p>
+      <p> - Channel catfish </p>
+      <p> - West African mud turtle </p>
+      <p> - Channel bull blenny </p>
+      <p> - Sooty mangabey </p>
+      <p> - Dolphin </p>
+      <p> - Naked mole-rat male </p>
+      <p> - Brown trout </p>
+      <p> - Eastern brown snake </p>
+      <p> - Mouse CAST/EiJ </p>
+      <p> - Spiny chromis </p>
+      <p> - Gorilla </p>
+      <p> - Silver-eye </p>
+      <p> - Sloth </p>
+      <p> - Eurasian sparrowhawk </p>
+      <p> - Mouse AKR/J </p>
+      <p> - Sailfin molly </p>
+      <p> - Greater bamboo lemur </p>
+      <p> - Mangrove rivulus </p>
+      <p> - Platypus </p>
+      <p> - Live sharksucker </p>
+      <p> - Megabat </p>
+      <p> - Mouse NOD/ShiLtJ </p>
+      <p> - Ferret </p>
+      <p> - Coelacanth </p>
+      <p> - Lion </p>
+      <p> - Siamese fighting fish </p>
+      <p> - Pig - Wuzhishan </p>
+      <p> - Brazilian guinea pig </p>
+      <p> - Sheepshead minnow </p>
+      <p> - Beluga whale </p>
+      <p> - Domestic yak </p>
+      <p> - Orbiculate cardinalfish </p>
+      <p> - Chinese hamster CHOK1GS </p>
+      <p> - Kakapo </p>
+      <p> - Orangutan </p>
+      <p> - Daurian ground squirrel </p>
+      <p> - Pig - Bamei </p>
+      <p> - Mouse BALB/cJ </p>
+      <p> - Common carp huanghe </p>
+      <p> - Three-toed box turtle </p>
+      <p> - Tongue sole </p>
+      <p> - Chimpanzee </p>
+      <p> - Ma's night monkey </p>
+      <p> - Red-bellied piranha </p>
+      <p> - Pig - Tibetan </p>
+      <p> - Drill </p>
+      <p> - Anole lizard </p>
+      <p> - Duck </p>
+      <p> - Common carp german mirror </p>
+      <p> - Chilean tinamou </p>
+      <p> - Marmoset </p>
+      <p> - Chinese medaka </p>
+      <p> - Greater amberjack </p>
+      <p> - Mouse </p>
+      <p> - Dark-eyed junco </p>
+      <p> - Mouse DBA/2J </p>
+      <p> - Arctic ground squirrel </p>
+      <p> - Pig </p>
+      <p> - Mallard </p>
+      <p> - Dog - Great Dane </p>
+      <p> - Great Tit </p>
+      <p> - Pig - Pietrain </p>
+      <p> - Mainland tiger snake </p>
+      <p> - Pig - Jinhua </p>
+      <p> - Lesser hedgehog tenrec </p>
+      <p> - Climbing perch </p>
+      <p> - Tuatara </p>
+      <p> - Wild yak </p>
+      <p> - Bushbaby </p>
+      <p> - Degu </p>
+      <p> - Siberian musk deer </p>
+      <p> - Northern pike </p>
+      <p> - Pig - Meishan </p>
+      <p> - Gilthead seabream </p>
+      <p> - Kangaroo rat </p>
+      <p> - Ring-necked pheasant </p>
+      <p> - Mummichog </p>
+      <p> - American mink </p>
+      <p> - Tasmanian devil </p>
+      <p> - Horned golden-line barbel </p>
+      <p> - Shrew mouse </p>
+      <p> - Golden Hamster </p>
+      <p> - Pachon cavefish </p>
+      <p> - Mouse PWK/PhJ </p>
+      <p> - Hybrid - Bos Taurus </p>
+      <p> - Canada lynx </p>
+      <p> - Wallaby </p>
+      <p> - Argentine black and white tegu </p>
+      <p> - Monterrey platyfish </p>
+      <p> - Blue tit </p>
+      <p> - Japanese quail </p>
+      <p> - Microbat </p>
+      <p> - Panda </p>
+      <p> - Chinook salmon </p>
+      <p> - Hedgehog </p>
+      <p> - Ryukyu mouse </p>
+      <p> - Chinese hamster CriGri </p>
+      <p> - Tree Shrew </p>
+      <p> - Central bearded dragon </p>
+      <p> - Amazon molly </p>
+      <p> - Helmeted guineafowl </p>
+      <p> - Stickleback </p>
+      <p> - Northern American deer mouse </p>
+      <p> - Saccharomyces cerevisiae </p>
+      <p> - Dog - Basenji </p>
+      <p> - Golden eagle </p>
+      <p> - Tiger tail seahorse </p>
+      <p> - Chacoan peccary </p>
+      <p> - Japanese medaka HdrR </p>
+      <p> - Lamprey </p>
+      <p> - Mexican tetra </p>
+      <p> - Common snapping turtle </p>
+      <p> - American black bear </p>
+      <p> - Okarito brown kiwi </p>
+      <p> - Gouldian finch </p>
+      <p> - Mongolian gerbil </p>
+      <p> - C.intestinalis </p>
+      <p> - Mouse LP/J </p>
+      <p> - Great spotted kiwi </p>
+      <p> - Western mosquitofish </p>
+      <p> - Periophthalmus magnuspinnatus </p>
+      <p> - Mouse 129S1/SvImJ </p>
+      <p> - Flycatcher </p>
+      <p> - Yellow-billed parrot </p>
+      <p> - Mouse C57BL/6NJ </p>
+      <p> - Pig-tailed macaque </p>
+      <p> - Dingo </p>
+      <p> - Rainbow trout </p>
+      <p> - Alpaca </p>
+      <p> - Zig-zag eel </p>
+      <p> - Hagfish </p>
+      <p> - Common carp </p>
+      <p> - Armadillo </p>
+      <p> - Pig - Largewhite </p>
+      <p> - Opossum </p>
+      <p> - Lyretail cichlid </p>
+      <p> - Goat </p>
+      <p> - Barramundi perch </p>
+      <p> - Small tree finch </p>
+      <p> - Mouse WSB/EiJ </p>
+      <p> - American beaver </p>
+      <p> - Pig - Landrace </p>
+      <p> - Elephant shark </p>
+      <p> - Sperm whale </p>
+      <p> - Spotted gar </p>
+      <p> - Mouse CBA/J </p>
+      <p> - Blue tilapia </p>
+      <p> - Platyfish </p>
+      <p> - Medium ground-finch </p>
+      <p> - Paramormyrops kingsleyae </p>
+      <p> - Tarsier </p>
+      <p> - Common wall lizard </p>
+      <p> - Swan goose </p>
+      <p> - Blue-ringed sea krait </p>
+      <p> - Common canary </p>
+      <p> - Chinese hamster PICR </p>
+      <p> - Vervet-AGM </p>
+      <p> - Golden-collared manakin </p>
+      <p> - Long-tailed chinchilla </p>
+      <p> - Zebra finch </p>
+      <p> - C.savignyi </p>
+      <p> - Rat </p>
+      <p> - Ocean sunfish </p>
+      <p> - Little spotted kiwi </p>
+      <p> - Indian medaka </p>
+      <p> - Cow </p>
+      <p> - Leopard </p>
+      <p> - Atlantic salmon </p>
+      <p> - Alpine marmot </p>
+      <p> - Large yellow croaker </p>
+      <p> - Upper Galilee mountains blind mole rat </p>
+      <p> - Goodes thornscrub tortoise </p>
+      <p> - Indian peafowl </p>
+      <p> - Common carp hebao red </p>
+      <p> - Denticle herring </p>
+      <p> - Koala </p>
+      <p> - Midas cichlid </p>
+      <p> - Golden-line barbel </p>
+      <p> - Turbot </p>
+      <p> - Ruff </p>
+      <p> - Pig USMARC </p>
+      <p> - Pig - Hampshire </p>
+      <p> - Human </p>
+      <p> - Burrowing owl </p>
+      <p> - Cod </p>
+      <p> - Burton's mouthbrooder </p>
+      <p> - Donkey </p>
+      <p> - Guinea Pig </p>
+      <p> - Clown anemonefish </p>
+      <p> - Golden pheasant </p>
+      <p> - Sheep </p>
+      <p> - Red fox </p>
+      <p> - Bonobo </p>
+      <p> - Indian glassy fish </p>
+      <p> - Tetraodon </p>
+      <p> - Ballan wrasse </p>
+      <p> - Pig - Berkshire </p>
+      <p> - Hybrid - Bos Indicus </p>
+      <p> - Budgerigar </p>
+      <p> - Meerkat </p>
+      <p> - European seabass </p>
+      <p> - Elephant </p>
+      <p> - Emu </p>
+      <p> - Tiger </p>
+      <p> - Drosophila melanogaster </p>
+      <p> - Steppe mouse </p>
+      <p> - Swamp eel </p>
+      <p> - Japanese medaka HNI </p>
+      <p> - Jewelled blenny </p>
+      <p> - Mouse C3H/HeJ </p>
+      <p> - Zebra mbuna </p>
+      <p> - White-throated sparrow </p>
+      <p> - Painted turtle </p>
+      <p> - Zebrafish </p>
+      <p> - Goldfish </p>
+      <p> - Horse </p>
+      <p> - Greater horseshoe bat </p>
+      <p> - Eastern happy </p>
+      <p> - Tropical clawed frog </p>
+      <p> - Spoon-billed sandpiper </p>
+      <p> - Angola colobus </p>
+      <p> - Algerian mouse </p>
+      <p> - Dog </p>
+      <p> - Macaque </p>
+      <p> - Squirrel </p>
+      <p> - Mouse Lemur </p>
+      <p> - Common wombat </p>
+      <p> - Rabbit </p>
+      <p> - Polar bear </p>
+      <p> - Atlantic herring </p>
+      <p> - Chicken </p>
+      <p> - Fugu </p>
+      <p> - Bicolor damselfish </p>
+      <p> - Mouse NZO/HlLtJ </p>
+      <p> - Reedfish </p>
+      <p> - Chinese softshell turtle </p>
+      <p> - Blunt-snouted clingfish </p>
+      <p> - Caenorhabditis elegans </p>
+      <p> - Coquerel's sifaka </p>
+      <p> - Agassiz's desert tortoise </p>
+      <p> - Guppy </p>
+      <p> - Javanese ricefish </p>
+      <p> - Makobe Island cichlid </p>
+      <p> - Prairie vole </p>
+      <p> - Gelada </p>
+      <p> - Pinecone soldierfish </p>
+      <p> - Arabian camel </p>
+      <p> - Japanese medaka HSOK </p>
+      <p> - Asiatic black bear </p>
+      <p> - Bengalese finch </p>
+      <p> - Hyrax </p>
+      <p> - Turkey </p>
+      <p> - Shrew </p>
+      <p> - Golden snub-nosed monkey </p>
+      <p> - Black snub-nosed monkey </p>
+      <p> - Round goby </p>
+      <p> - Asian bonytongue </p>
+      <p> - Electric eel </p>
+      <p> - American bison </p>
+      <p> - Shortfin molly </p>
+      <p> - Orange clownfish </p>
+      <p> - Komodo dragon </p>
+      <p> - Blind barbel </p>
+      <p> - Ugandan red Colobus </p>
+      <p> - Olive baboon </p>
+      <p> - Lesser Egyptian jerboa </p>
+      <p> - Cat </p>
+      <p> - Pink-footed goose </p>
+      <p> - Capuchin </p>
+      <p> - Australian saltwater crocodile </p>
+      <p> - Naked mole-rat female </p>
+      <p> - Mouse FVB/NJ </p>
+      <p> - Abingdon island giant tortoise </p>
+      <p> - Gibbon </p>
+      <p> - Mouse A/J </p>
+      <p> - Yellowtail amberjack </p>
+      <p> - Bolivian squirrel monkey </p>
+      <p> - Crab-eating macaque </p>
+      <p> - Damara mole rat </p>
+      <p> - Huchen </p>
+      <p> - Rufous-capped babbler </p>
+      <p> - Blue-crowned manakin </p>
+      <a href="/">Main page</a>
+   </body>
+</html>
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---> karyotype endpoint
+
+* TEST 1:
+
+* Input:
+
+http://127.0.0.1:8080/listSpecies?limit=1
+
+* Output:
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---> chromosomeLength endpoint
+
+* TEST 1:
+
+* Input:
+
+http://127.0.0.1:8080/chromosomeLength?Specie=mouse+&Chromosome=1
+
+* Output:
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+* TEST 2:
+
+* Input:
+
+http://127.0.0.1:8080/chromosomeLength?Specie=mouse+&Chromosome=1
+
+* Output:
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+* TEST 1:
+
+* Input:
+
+http://127.0.0.1:8080/chromosomeLength?Specie=mouse+&Chromosome=1
+
+* Output:
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
