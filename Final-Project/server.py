@@ -131,14 +131,14 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                                      <title> Karyotype </title >
                                 </head >
                                 <body  style="background-color:rgb(255,255,182)">
-                                <h2> The names of the chromosomes are:</h2>"""
+                                <h2 style="color:rgb(21,105,150);"> The names of the chromosomes are:</h2>"""
 
                 # Get the arguments after the ?
                 get_value = arguments[1]
 
                 # We get the seq index and name
-                seq_n = get_value.split('?')  # splits by the ?
-                seq_name, name_sp = seq_n[0].split("=")  # splits by the =
+                specie = get_value.split('?')  # splits by the ?
+                specie_method, name_sp = specie[0].split("=")  # splits by the =
 
                 endpoint = 'info/assembly/'  #stablishes the endpoint and its parameters for the request
                 parameters = '?content-type=application/json'
@@ -157,12 +157,13 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
                 # -- Read the response's body
                 body = response.read().decode("utf-8") #utf_8 to admit all characters in the response
+                body = json.loads(body) #loads is a json method to read json response
                 karyotype_data = body["karyotype"] #list to save all the names
 
                 for chromosome in karyotype_data: #iteration to print all the chromosomes names
                     contents += f"""<p> - {chromosome} </p>"""
-                    contents += f"""<a href="/">Main page </a></body></html>""" #link to return to main page
 
+                contents += f"""<a href="/">Main page </a></body></html>"""  # link to return to main page
 
 
             # --------------------------------------------Cromosome length--------------------------------------------
