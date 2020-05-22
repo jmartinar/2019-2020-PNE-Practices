@@ -225,9 +225,12 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 contents = f"""<!DOCTYPE html>
                             <html lang = "en">            
                             <head>  
-                            <meta charset = "utf-8"
+                            <meta charset = "utf-8">
                             <title> Gene Sequence </title>
-                            </head>"""
+                            </head>
+                            <body  style="background-color:rgb(255,255,182)">
+                                <h1 style="color:rgb(225, 141, 27)"> Gene Sequence</h1>"""
+
 
                 # We get the arguments that go after the ?
                 get_value = arguments[1]
@@ -237,7 +240,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 seq_n = get_value.split('?') #splits the argument by the ?
                 seq_name, name_seq = seq_n[0].split("=")   # #splits by the = --> name of the gene inputed
 
-                contents += f"""<p> The sequence of gene {name_seq} is:  </p>""" #html to print the gene name
+                contents += f"""<p style="color:rgb(225, 141, 27)"> The sequence of gene {name_seq} is:  </p>""" #html to print the gene name
 
                 first_endpoint = "xrefs/symbol/homo_sapiens/"   #first endpoint = homosapiens --> human gene
                 parameters = '?content-type=application/json'
@@ -288,11 +291,12 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             elif first_argument == "/geneInfo": #Return information about a human gene: start, end, Length, id and Chromose
 
                 contents = f"""<!DOCTYPE html>
-                                <html lang = "en">            
-                                <head>  
-                                <meta charset = "utf-8"
-                                <title> Gene Information</title>
-                                </head>"""
+                                <html lang = "en">     
+                                <head>
+                                    <meta charset = "utf-8" >
+                                    <title>Gene Information</title>
+                                </head>
+                                 <body  style="background-color:rgb(255,255,182)">"""
 
                 # We get the arguments that go after the ?
                 get_value = arguments[1]
@@ -302,7 +306,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 seq_n = get_value.split('?') #splits the argument by the ?
                 seq_name, name_seq = seq_n[0].split("=") # #splits by the = --> name of the gene inputed
 
-                contents += f"""<p> The information of gene {name_seq} is:  </p>"""  #html to print the gene name
+                contents += f"""<p style="color:rgb(225, 141, 27)"> Information of gene {name_seq} is:  </p>"""  #html to print the gene name
 
                 first_endpoint = "xrefs/symbol/homo_sapiens/" #first endpoint = homosapiens --> human gene
                 parameters = '?content-type=application/json'
@@ -345,9 +349,9 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 length = int(second_body ["end"]) - int(second_body ["start"]) #measure the length of the gene
 
                 #prints the data of the starting point, end, length, region name and gene id
-                contents += f"""<p> The gene starts at: {second_body ["start"]} </p><p> The gene ends at: {second_body ["end"]} </p>
-                            <p> The gene length is: {length}</p>
-                            <p> The gene id is at: {id_gene} </p> <p> The gene is on chromosome: {second_body ["seq_region_name"]} </p>
+                contents += f"""<p> -Starts at: {second_body ["start"]} </p><p> -Ends at: {second_body ["end"]} </p>
+                            <p> -Length is: {length}</p>
+                            <p> -ID is at: {id_gene} </p> <p> Located in chromosome: {second_body ["seq_region_name"]} </p>
                             <a href="/">Main page</a></body></html>"""
 
 
@@ -358,10 +362,11 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 contents = f"""<!DOCTYPE html>
                                     <html lang = "en">            
                                     <head>  
-                                    <meta charset = "utf-8"
+                                    <meta charset = "utf-8">
                                     <title> Gene Calculations</title>
-                                    </head>"""
-
+                                    </head>
+                                        <body  style="background-color:rgb(255,255,182)">
+                                        <h1 style="color:rgb(225, 141, 27)">Gene calculations</h1>"""
                 # We get the arguments that go after the ?
                 get_value = arguments[1]
 
@@ -431,9 +436,11 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 contents = f"""<!DOCTYPE html>
                               <html lang = "en">            
                               <head>  
-                              <meta charset = "utf-8"
+                              <meta charset = "utf-8">
                               <title> Gene List</title>
-                              </head>"""
+                              </head>
+                              <body  style="background-color:rgb(255,255,182)">
+                              <h1 style="color:rgb(225, 141, 27)">Gene List</h1>"""
 
                 # We get the arguments that go after the ?
                 get_value = arguments[1]
@@ -445,7 +452,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 chromosome_start, start = pairs[1].split("=") #chromosome start (pair[1] column)
                 chromosome_end, end = pairs[2].split("=")  #chromosome end (pair[2] column)
 
-                contents += f"""<p> List of genes of the chromosome {chromo}, which goes from {start} to {end} </p>"""
+                contents += f"""<p style="color:rgb(225, 141, 27)"> List of genes of the chromosome {chromo}, which goes from {start} to {end}: </p>"""
 
                 endpoint = "overlap/region/human/"  # first endpoint --> human
                 parameters = '?feature=gene;content-type=application/json'
