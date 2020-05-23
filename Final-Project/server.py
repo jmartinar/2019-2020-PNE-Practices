@@ -140,9 +140,17 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 specie = get_value.split('?')  # splits by the ?
                 specie_method, name_sp = specie[0].split("=")  # splits by the =
 
+                full_name = "" #we initialize the variable to keep doble or more word names
+                for n in range(0, len(name_sp)): #we iterate to inlude all the characters of the entire name (all words combined with +)
+                        if name_sp[n] == "+": #when we get a + we create a space with "%20" in the url to be able to search it in the database as a 2 (or more) word species
+                            full_name += "%20"
+                        else:
+                            full_name += name_sp[n] #in case its a one word species
+
+
                 endpoint = 'info/assembly/'  #stablishes the endpoint and its parameters for the request
                 parameters = '?content-type=application/json'
-                request = endpoint + name_sp + parameters
+                request = endpoint + full_name + parameters
 
                 try:
                     conn.request("GET", request) #connection request
@@ -190,10 +198,16 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                             <p>ERROR INVALID VALUE. Introduce an integer value for chromosome</p>
                             <a href="/">Main page</a></body></html>"""
 
+                full_name = ""  # we initialize the variable to keep doble or more word names
+                for n in range(0, len(specie)):  # we iterate to inlude all the characters of the entire name (all words combined with +)
+                    if specie[n] == "+":  # when we get a + we create a space with "%20" in the url to be able to search it in the database as a 2 (or more) word species
+                        full_name += "%20"
+                    else:
+                        full_name += specie[n]  # in case its a one word species
 
-                endpoint = 'info/assembly/' #stablishes the endpoint and its parameters for the reques
+                endpoint = 'info/assembly/'  # stablishes the endpoint and its parameters for the request
                 parameters = '?content-type=application/json'
-                request = endpoint + specie + parameters #request line
+                request = endpoint + full_name + parameters
 
                 try:
                     conn.request("GET", request)  #connection request
