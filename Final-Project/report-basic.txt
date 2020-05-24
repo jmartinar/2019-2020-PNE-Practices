@@ -1313,6 +1313,26 @@ http://127.0.0.1:8080/listSpecies?limit=286
    </body>
 </html>
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+* TEST 11 ERROR/EXCEPTION when 0 is introduced:
+
+* Input:
+
+http://127.0.0.1:8080/listSpecies?limit=0
+
+* Output:
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+   <head>
+      <meta charset="utf-8">
+      <title>ERROR</title>
+   </head>
+   <body style="background-color: red;">
+      <h1>ERROR</h1>
+      <p>Resource not available</p>
+      <p>Your search's limit is equal or less than 0</p>
+   </body>
+</html>
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ---> karyotype endpoint
@@ -1528,6 +1548,28 @@ http://127.0.0.1:8080/karyotype?Specie=pig
    </body>
 </html>
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+* TEST ERROR/EXCEPTION when the species isnt in the database:
+
+* Input:
+
+http://127.0.0.1:8080/karyotype?Specie=1325135
+
+* Output:
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <title>Error</title>
+   </head>
+   <body style="background-color:rgb(255,255,182)">
+      <h1>ERROR</h1>
+      <p> Selected specie's karyotype information is not available </p>
+      <p><a href="/Karyotype?Specie=1325135">Check if your specie is in our database</a><br><br>
+      <p> Introduce a specie in the database to find its karyotype </p>
+      <a href="/"> Main page </a> </p>
+   </body>
+</html>
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ---> chromosomeLength endpoint
@@ -1702,6 +1744,28 @@ http://127.0.0.1:8080/chromosomeLength?Specie=chicken+&Chromosome=W
       <h2 style="color:rgb(21,105,150);"> The length of the 'W' chicken chromosome is: 6813114</h2>
       <a href="/"> Main page</a
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+* TEST ERROR/EXCEPTION when the species isnt in the database:
+
+* Input:
+
+http://127.0.0.1:8080/chromosomeLength?Specie=12345&Chromosome=12
+
+* Output:
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <title>Error</title>
+   </head>
+   <body style="background-color:rgb(255,255,182)">
+      <h1>ERROR</h1>
+      <p> Selected specie's cromosome length information is not available </p>
+      <p> Introduce a specie in the database (with a proper chromosome) to find its length information </p>
+      <p><a href="/Karyotype?Specie=12345">Check if your specie is in our database</a><br><br>
+         <a href="/"> Main page </a>
+      </p>
+   </body>
+</html>
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
