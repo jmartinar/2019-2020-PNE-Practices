@@ -61,7 +61,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                                      <h1 style="color:rgb(21,105,150);"> List of species in the genome database</h1>
                                      <p style="color:rgb(21,105,150);"><b>The total number of species in ensembl is: 267</b></p>
                                      <p>The total number of species in ensembl is: 286</p>"""
-                              
+
 
                 #Get the arguments after the ?
                 get_value = arguments[1]
@@ -265,8 +265,8 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                                                         </head>
                                                         <body style="background-color:rgb(255,255,182)">
                                                             <h1>ERROR</h1>
-                                                            <p> Selected specie's karyotype information is not available </p>
-                                                            <p> Introduce a specie in the database to find its karyotype </p>
+                                                            <p> Selected specie's cromosome length information is not available </p>
+                                                            <p> Introduce a specie in the database (with a proper chromosome) to find its length information </p>
                                                             <a href="/"> Main page </a> </p>
                                                             </body>
                                                             </html>"""
@@ -284,60 +284,73 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                             <body  style="background-color:rgb(255,255,182)">
                                 <h1 style="color:rgb(225, 141, 27)"> Gene Sequence</h1>"""
 
-
-                # We get the arguments that go after the ?
-                get_value = arguments[1]
-
-                # We get the seq index, after we have a couple of elements, the one which we need is the value of the index
-                # position of the sequence
-                seq_n = get_value.split('?') #splits the argument by the ?
-                seq_name, name_seq = seq_n[0].split("=")   # #splits by the = --> name of the gene inputed
-
-                contents += f"""<p style="color:rgb(225, 141, 27)"> The sequence of gene {name_seq} is:  </p>""" #html to print the gene name
-
-                first_endpoint = "xrefs/symbol/homo_sapiens/"   #first endpoint = homosapiens --> human gene
-                parameters = '?content-type=application/json'
-                first_request = first_endpoint + name_seq + parameters
-
                 try:
-                    conn.request("GET", first_request) #connection request
+                    # We get the arguments that go after the ?
+                    get_value = arguments[1]
 
-                except ConnectionRefusedError: #exception for connection error
-                    print("ERROR! Cannot connect to the Server")
-                    exit()
+                    # We get the seq index, after we have a couple of elements, the one which we need is the value of the index
+                    # position of the sequence
+                    seq_n = get_value.split('?') #splits the argument by the ?
+                    seq_name, name_seq = seq_n[0].split("=")   # #splits by the = --> name of the gene inputed
 
-                # ----------------------Main program of geneSeq------------------------
+                    contents += f"""<p style="color:rgb(225, 141, 27)"> The sequence of gene {name_seq} is:  </p>""" #html to print the gene name
 
-                # -- Read the response message from the server
-                response = conn.getresponse()
-                # -- Read the response's body
-                body = response.read().decode()
-                body = json.loads(body) #loads is a json method to read json response
+                    first_endpoint = "xrefs/symbol/homo_sapiens/"   #first endpoint = homosapiens --> human gene
+                    parameters = '?content-type=application/json'
+                    first_request = first_endpoint + name_seq + parameters
 
-                id_gene = body[0] #to get the id of the gene (first column of body) #json.loads(id)
-                id_gene = id_gene["id"]
+                    try:
+                        conn.request("GET", first_request) #connection request
 
-                second_endpoint = "sequence/id/" #to get specifically the sequence of the gene we id'd
-                second_request = second_endpoint + id_gene + parameters
+                    except ConnectionRefusedError: #exception for connection error
+                        print("ERROR! Cannot connect to the Server")
+                        exit()
 
-                try:
-                    conn.request("GET", second_request)#connection request
+                    # ----------------------Main program of geneSeq------------------------
 
-                except ConnectionRefusedError: #exception for connection error
-                    print("ERROR! Cannot connect to the Server")
-                    exit()
+                    # -- Read the response message from the server
+                    response = conn.getresponse()
+                    # -- Read the response's body
+                    body = response.read().decode()
+                    body = json.loads(body) #loads is a json method to read json response
 
-                # -- Read the second response message from the server
-                second_response = conn.getresponse()
+                    id_gene = body[0] #to get the id of the gene (first column of body) #json.loads(id)
+                    id_gene = id_gene["id"]
 
-                # -- Read the second response's body
-                second_body = second_response.read().decode("utf-8")
-                second_body = json.loads(second_body) #loads is a json method to read json response
+                    second_endpoint = "sequence/id/" #to get specifically the sequence of the gene we id'd
+                    second_request = second_endpoint + id_gene + parameters
 
-                sequence = second_body["seq"] #gene sequence asked
-                contents += f"""<p>{sequence}</p><a href="/">Main page</a></body></html>"""  #print the sequence on screen
+                    try:
+                        conn.request("GET", second_request)#connection request
 
+                    except ConnectionRefusedError: #exception for connection error
+                        print("ERROR! Cannot connect to the Server")
+                        exit()
 
+                    # -- Read the second response message from the server
+                    second_response = conn.getresponse()
+
+                    # -- Read the second response's body
+                    second_body = second_response.read().decode("utf-8")
+                    second_body = json.loads(second_body) #loads is a json method to read json response
+
+                    sequence = second_body["seq"] #gene sequence asked
+                    contents += f"""<p>{sequence}</p><a href="/">Main page</a></body></html>"""  #print the sequence on screen
+
+                except KeyError:
+                    contents = """<!DOCTYPE html> 
+                                      <html lang="en"> 
+                                            <head>
+                                                <meta charset="UTF-8">
+                                                <title>Error</title>
+                                            </head>
+                                            <body style="background-color:rgb(255,255,182)">
+                                                <h1>ERROR</h1>
+                                                <p> Selected specie's gene sequence information is not available </p>
+                                                <p> Introduce a valid human gene to find its sequence information </p>
+                                                <a href="/"> Main page </a> </p>
+                                                </body>
+                                      </html>"""
 
             # --------------------------------------------gene Info-------------------------------------------
 
@@ -351,62 +364,77 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                                 </head>
                                  <body  style="background-color:rgb(255,255,182)">"""
 
-                # We get the arguments that go after the ?
-                get_value = arguments[1]
-
-                # We get the seq index, after we have a couple of elements, the one which we need is the value of the index
-                # position of the sequence
-                seq_n = get_value.split('?') #splits the argument by the ?
-                seq_name, name_seq = seq_n[0].split("=") # #splits by the = --> name of the gene inputed
-
-                contents += f"""<p style="color:rgb(225, 141, 27)"> Information of gene {name_seq} is:  </p>"""  #html to print the gene name
-
-                first_endpoint = "xrefs/symbol/homo_sapiens/" #first endpoint = homosapiens --> human gene
-                parameters = '?content-type=application/json'
-                first_request = first_endpoint + name_seq + parameters
-
                 try:
-                    conn.request("GET", first_request) #connection request
-                except ConnectionRefusedError:
-                    print("ERROR! Cannot connect to the Server") #exception for connection error
-                    exit()
+                    # We get the arguments that go after the ?
+                    get_value = arguments[1]
 
-                # ----------------------Main program of geneInfo------------------------
+                    # We get the seq index, after we have a couple of elements, the one which we need is the value of the index
+                    # position of the sequence
+                    seq_n = get_value.split('?') #splits the argument by the ?
+                    seq_name, name_seq = seq_n[0].split("=") # #splits by the = --> name of the gene inputed
 
-                # -- Read the response message from the server
-                response = conn.getresponse()
+                    contents += f"""<p style="color:rgb(225, 141, 27)"> Information of gene {name_seq} is:  </p>"""  #html to print the gene name
 
-                # -- Read the response's body
-                body = response.read().decode()
-                body = json.loads(body) #loads is a json method to read json response
+                    first_endpoint = "xrefs/symbol/homo_sapiens/" #first endpoint = homosapiens --> human gene
+                    parameters = '?content-type=application/json'
+                    first_request = first_endpoint + name_seq + parameters
 
-                id_gene = body[0] #to get the id of the gene (first column of body) #json.loads(id)
-                id_gene = id_gene["id"]
+                    try:
+                        conn.request("GET", first_request) #connection request
+                    except ConnectionRefusedError:
+                        print("ERROR! Cannot connect to the Server") #exception for connection error
+                        exit()
 
-                second_endpoint = "lookup/id/" #to get specifically the info of the sequence of the gene we id'd
-                second_request = second_endpoint + id_gene + parameters
+                    # ----------------------Main program of geneInfo------------------------
 
-                try:
-                    conn.request("GET", second_request) #connection request
+                    # -- Read the response message from the server
+                    response = conn.getresponse()
 
-                except ConnectionRefusedError: #exception for connection error
-                    print("ERROR! Cannot connect to the Server")
-                    exit()
+                    # -- Read the response's body
+                    body = response.read().decode()
+                    body = json.loads(body) #loads is a json method to read json response
 
-                # -- Read the second response message from the server
-                second_response = conn.getresponse()
-                # -- Read the response's body
-                second_body = second_response.read().decode()
-                second_body = json.loads(second_body ) #loads is a json method to read json response
+                    id_gene = body[0] #to get the id of the gene (first column of body) #json.loads(id)
+                    id_gene = id_gene["id"]
 
-                length = int(second_body ["end"]) - int(second_body ["start"]) #measure the length of the gene
+                    second_endpoint = "lookup/id/" #to get specifically the info of the sequence of the gene we id'd
+                    second_request = second_endpoint + id_gene + parameters
 
-                #prints the data of the starting point, end, length, region name and gene id
-                contents += f"""<p> -Starts at: {second_body ["start"]} </p><p> -Ends at: {second_body ["end"]} </p>
-                            <p> -Length is: {length}</p>
-                            <p> -ID is at: {id_gene} </p> <p> Located in chromosome: {second_body ["seq_region_name"]} </p>
-                            <a href="/">Main page</a></body></html>"""
+                    try:
+                        conn.request("GET", second_request) #connection request
 
+                    except ConnectionRefusedError: #exception for connection error
+                        print("ERROR! Cannot connect to the Server")
+                        exit()
+
+                    # -- Read the second response message from the server
+                    second_response = conn.getresponse()
+                    # -- Read the response's body
+                    second_body = second_response.read().decode()
+                    second_body = json.loads(second_body ) #loads is a json method to read json response
+
+                    length = int(second_body ["end"]) - int(second_body ["start"]) #measure the length of the gene
+
+                    #prints the data of the starting point, end, length, region name and gene id
+                    contents += f"""<p> -Starts at: {second_body ["start"]} </p><p> -Ends at: {second_body ["end"]} </p>
+                                <p> -Length is: {length}</p>
+                                <p> -ID is at: {id_gene} </p> <p> Located in chromosome: {second_body ["seq_region_name"]} </p>
+                                <a href="/">Main page</a></body></html>"""
+
+                except KeyError:
+                    contents = """<!DOCTYPE html> 
+                                                <html lang="en"> 
+                                                      <head>
+                                                          <meta charset="UTF-8">
+                                                          <title>Error</title>
+                                                      </head>
+                                                      <body style="background-color:rgb(255,255,182)">
+                                                          <h1>ERROR</h1>
+                                                          <p> Selected specie's gene information is not available </p>
+                                                          <p> Introduce a valid human gene to find its information </p>
+                                                          <a href="/"> Main page </a> </p>
+                                                          </body>
+                                                </html>"""
 
             # --------------------------------------------gene Calc--------------------------------------------
 
@@ -420,66 +448,81 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                                     </head>
                                         <body  style="background-color:rgb(255,255,182)">
                                         <h1 style="color:rgb(225, 141, 27)">Gene calculations</h1>"""
-                # We get the arguments that go after the ?
-                get_value = arguments[1]
-
-                # We get the seq index, after we have a couple of elements, the one which we need is the value of the index
-                # position of the sequence
-                seq_n = get_value.split('?') #splits the argument by the ?
-                seq_name, name_seq = seq_n[0].split("=") #splits by the = --> name of the gene inputed
-
-                first_endpoint = "xrefs/symbol/homo_sapiens/"  #first endpoint = homosapiens --> human gene
-                parameters = '?content-type=application/json'
-                first_request = first_endpoint + name_seq + parameters
-
                 try:
-                    conn.request("GET", first_request) #connection request
+                    # We get the arguments that go after the ?
+                    get_value = arguments[1]
 
-                except ConnectionRefusedError:
-                    print("ERROR! Cannot connect to the Server") #exception for connection error
-                    exit()
+                    # We get the seq index, after we have a couple of elements, the one which we need is the value of the index
+                    # position of the sequence
+                    seq_n = get_value.split('?') #splits the argument by the ?
+                    seq_name, name_seq = seq_n[0].split("=") #splits by the = --> name of the gene inputed
 
-                # ----------------------Main program of geneCalc------------------------
+                    first_endpoint = "xrefs/symbol/homo_sapiens/"  #first endpoint = homosapiens --> human gene
+                    parameters = '?content-type=application/json'
+                    first_request = first_endpoint + name_seq + parameters
 
-                # -- Read the response message from the server
-                response = conn.getresponse()
+                    try:
+                        conn.request("GET", first_request) #connection request
 
-                # -- Read the response's body
-                body = response.read().decode('utf-8')
-                body = json.loads(body) #loads is a json method to read json response
+                    except ConnectionRefusedError:
+                        print("ERROR! Cannot connect to the Server") #exception for connection error
+                        exit()
+
+                    # ----------------------Main program of geneCalc------------------------
+
+                    # -- Read the response message from the server
+                    response = conn.getresponse()
+
+                    # -- Read the response's body
+                    body = response.read().decode('utf-8')
+                    body = json.loads(body) #loads is a json method to read json response
 
 
-                id_gene = body[0] #to get the id of the gene (first column of body) #json.loads(id)
-                id_gene = id_gene["id"]
+                    id_gene = body[0] #to get the id of the gene (first column of body) #json.loads(id)
+                    id_gene = id_gene["id"]
 
-                second_endpoint = "sequence/id/" #to get specifically the info of the sequence of the gene we id'd
-                second_request = second_endpoint + id_gene + parameters
+                    second_endpoint = "sequence/id/" #to get specifically the info of the sequence of the gene we id'd
+                    second_request = second_endpoint + id_gene + parameters
 
-                try:
-                    conn.request("GET", second_request) #connection request
+                    try:
+                        conn.request("GET", second_request) #connection request
 
-                except ConnectionRefusedError:
-                    print("ERROR! Cannot connect to the Server") #exception for connection error
-                    exit()
+                    except ConnectionRefusedError:
+                        print("ERROR! Cannot connect to the Server") #exception for connection error
+                        exit()
 
-                # -- Read the second response message from the server
-                second_response = conn.getresponse()
+                    # -- Read the second response message from the server
+                    second_response = conn.getresponse()
 
-                # -- Read the second response's body
-                second_body = second_response.read().decode()
-                second_body = json.loads(second_body)
+                    # -- Read the second response's body
+                    second_body = second_response.read().decode()
+                    second_body = json.loads(second_body)
 
-                sequence = Seq(second_body["seq"]) #gets the sequence of the gene
+                    sequence = Seq(second_body["seq"]) #gets the sequence of the gene
 
-                contents += f"""<p> The length of gene {name_seq} is: {sequence.len()} </p>"""
+                    contents += f"""<p> The length of gene {name_seq} is: {sequence.len()} </p>"""
 
-                list_of_bases = ["A", "C", "G", "T"]
+                    list_of_bases = ["A", "C", "G", "T"]
 
-                for base in list_of_bases:
-                    perc_base = round(sequence.count_base(base) * 100 / sequence.len(), 2)
-                    contents += f"""<p> {base} : {sequence.count_base(base)} ({perc_base}%) </p>"""
-                contents += f"""<a href="/">Main page</a></body></html>"""
+                    for base in list_of_bases:
+                        perc_base = round(sequence.count_base(base) * 100 / sequence.len(), 2)
+                        contents += f"""<p> {base} : {sequence.count_base(base)} ({perc_base}%) </p>"""
+                    contents += f"""<a href="/">Main page</a></body></html>"""
 
+                except KeyError:
+                    contents = """<!DOCTYPE html> 
+                                                <html lang="en"> 
+                                                      <head>
+                                                          <meta charset="UTF-8">
+                                                          <title>Error</title>
+                                                      </head>
+                                                      <body style="background-color:rgb(255,255,182)">
+                                                          <h1>ERROR</h1>
+                                                          <p> Selected specie's gene calculations information is not available </p>
+                                                          <p> Introduce a valid human gene to find its calculations information </p>
+                                                          <a href="/"> Main page </a> </p>
+                                                          </body>
+                                                </html>"""
 
 
             # --------------------------------------------gene geneList--------------------------------------------
@@ -495,42 +538,56 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                               <body  style="background-color:rgb(255,255,182)">
                               <h1 style="color:rgb(225, 141, 27)">Gene List</h1>"""
 
-                # We get the arguments that go after the ?
-                get_value = arguments[1]
-
-                # We get the seq index, after we have a couple of elements, the one which we need is the value of the index
-                # position of the sequence
-                pairs = get_value.split('&') #splits by the &
-                chromo_value, chromo = pairs[0].split("=")  #having pair[0] as the species name
-                chromosome_start, start = pairs[1].split("=") #chromosome start (pair[1] column)
-                chromosome_end, end = pairs[2].split("=")  #chromosome end (pair[2] column)
-
-                contents += f"""<p style="color:rgb(225, 141, 27)"> List of genes of the chromosome {chromo}, which goes from {start} to {end}: </p>"""
-
-                endpoint = "overlap/region/human/"  # first endpoint --> human
-                parameters = '?feature=gene;content-type=application/json'
-                request = endpoint + chromo + ":" + start + "-" + end + parameters #request line
-
                 try:
-                    conn.request("GET", request)#connection request
+                    # We get the arguments that go after the ?
+                    get_value = arguments[1]
 
-                except ConnectionRefusedError:
-                    print("ERROR! Cannot connect to the Server") #exception for connection error
-                    exit()
+                    # We get the seq index, after we have a couple of elements, the one which we need is the value of the index
+                    # position of the sequence
+                    pairs = get_value.split('&') #splits by the &
+                    chromo_value, chromo = pairs[0].split("=")  #having pair[0] as the species name
+                    chromosome_start, start = pairs[1].split("=") #chromosome start (pair[1] column)
+                    chromosome_end, end = pairs[2].split("=")  #chromosome end (pair[2] column)
 
-                # ----------------------Main program of geneList------------------------
-                # -- Read the response message from the server
-                response = conn.getresponse()
-                # -- Read the response's body
-                body = response.read().decode("utf-8") #utf_8 to admit all characters in the response
-                body = json.loads(body)
+                    contents += f"""<p style="color:rgb(225, 141, 27)"> List of genes of the chromosome {chromo}, which goes from {start} to {end}: </p>"""
 
-                for element in body: #iteration to print all the elements of the chromosome within the chosen limits
-                    print(element["external_name"])
-                    contents += f"""<p>{element["external_name"]}</p>"""
-                contents += f"""<a href="/">Main page</a></body></html>"""
+                    endpoint = "overlap/region/human/"  # first endpoint --> human
+                    parameters = '?feature=gene;content-type=application/json'
+                    request = endpoint + chromo + ":" + start + "-" + end + parameters #request line
 
+                    try:
+                        conn.request("GET", request)#connection request
 
+                    except ConnectionRefusedError:
+                        print("ERROR! Cannot connect to the Server") #exception for connection error
+                        exit()
+
+                    # ----------------------Main program of geneList------------------------
+                    # -- Read the response message from the server
+                    response = conn.getresponse()
+                    # -- Read the response's body
+                    body = response.read().decode("utf-8") #utf_8 to admit all characters in the response
+                    body = json.loads(body)
+
+                    for element in body: #iteration to print all the elements of the chromosome within the chosen limits
+                        print(element["external_name"])
+                        contents += f"""<p>{element["external_name"]}</p>"""
+                    contents += f"""<a href="/">Main page</a></body></html>"""
+
+                except KeyError:
+                    contents = """<!DOCTYPE html> 
+                                                    <html lang="en"> 
+                                                          <head>
+                                                              <meta charset="UTF-8">
+                                                              <title>Error</title>
+                                                          </head>
+                                                          <body style="background-color:rgb(255,255,182)">
+                                                              <h1>ERROR</h1>
+                                                              <p> Selected specie's gene interval sequence information is not available </p>
+                                                              <p> Introduce a valid human gene to find its interval sequence information </p>
+                                                              <a href="/"> Main page </a> </p>
+                                                              </body>
+                                                    </html>"""
 
 
 
