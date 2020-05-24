@@ -286,7 +286,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                             contents = f"""<!DOCTYPE html><html lang = "en"><head><meta charset = "utf-8" ><title> Length Chromosome</title >
                                             </head ><body  style="background-color:rgb(255,255,182)"><h2 style="color:rgb(21,105,150);"> The length of the '{chromosome}' {specie} chromosome is: {length}</h2><a href="/"> Main page</a"""
                 except KeyError: #exception in case no value or an incorrect format value is inputed
-                    contents = """<!DOCTYPE html> 
+                    contents = f"""<!DOCTYPE html> 
                                                     <html lang="en"> 
                                                         <head>
                                                             <meta charset="UTF-8">
@@ -296,10 +296,10 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                                                             <h1>ERROR</h1>
                                                             <p> Selected specie's cromosome length information is not available </p>
                                                             <p> Introduce a specie in the database (with a proper chromosome) to find its length information </p>
+                                                            <p><a href="/Karyotype?Specie={full_name}">Check if your specie is in our database</a><br><br>
                                                             <a href="/"> Main page </a> </p>
                                                             </body>
                                                             </html>"""
-                    contents += f"""<p><br><a href="/Karyotype?Specie={full_name}">Check if your specie is in our database</a><br>"""
 
             # --------------------------------------------gene Seq--------------------------------------------
 
