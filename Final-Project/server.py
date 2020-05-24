@@ -70,52 +70,61 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 seq_n = get_value.split('?')  #splits the argument by the ?
                 seq_name, index = seq_n[0].split("=")  #splits by the =
 
+                if index == "":
+                    index = "286"
                 index = int(index)
-                contents += f"""<p>The number of species selected are: {index} </p>""" #html to print the total numbers of species selected
+                if index <= 0:
+                    contents = Path('error.html').read_text()
+                if index > 0:
+                    # Just addition to html response...
+                    contents += f"""<p>The number of species you selected are: {index} </p>"""
 
-                endpoint = 'info/species'  #stablishes the endpoint and its parameters for the request
-                parameters = '?content-type=application/json'
-                request = endpoint + parameters
+                    #html to print the total numbers of species selected
 
-                try:
-                    conn.request("GET", request)   #connection request
-
-                except ConnectionRefusedError:   #exception for connection error
-                    print("ERROR! Cannot connect to the Server")
-                    exit()
+                    endpoint = 'info/species'  #stablishes the endpoint and its parameters for the request
+                    parameters = '?content-type=application/json'
+                    request = endpoint + parameters
 
 
-                #----------------------Main program of listSpecies------------------------
+                    try:
+                        conn.request("GET", request)   #connection request
 
-                # -- Read the response message from the server
-                response = conn.getresponse()
+                    except ConnectionRefusedError:   #exception for connection error
+                        print("ERROR! Cannot connect to the Server")
+                        exit()
 
-                # -- Read the response's body
-                body = response.read().decode('utf_8') #utf_8 to admit all characters in the response
 
-                limit_list = [] #list to save all species within the limit
-                body = json.loads(body) #loads is a json method to read json response
-                limit = body["species"] #json.loads(species)
+                    #----------------------Main program of listSpecies------------------------
 
-                if index > len(limit):   #if there are more species than the limit
-                    contents = f"""<!DOCTYPE html>
-                                            <html lang = "en">
-                                            <head>
-                                             <meta charset = "utf-8" >
-                                             <title>ERROR</title >
-                                            </head>
-                                            <body  style="background-color:rgb(255,255,182)">
-                                            <p>ERROR LIMIT OUT OF RANGE. Introduce a valid limit value</p>
-                                            <a href="/">Main page</a></body></html>"""
-                else:
-                    for element in limit:  #iteration to get all the species within the limit
-                        limit_list.append(element["display_name"])   #appends each element to the list
+                    # -- Read the response message from the server
+                    response = conn.getresponse()
 
-                        if len(limit_list) == index:
-                            contents += f"""<p>The species are: </p>"""
-                            for specie in limit_list:   #iteration to print all the species in the limit list
-                                contents += f"""<p> - {specie} </p>"""
-                    contents += f"""<a href="/">Main page</a></body></html>""" #link to return to main page
+                    # -- Read the response's body
+                    body = response.read().decode('utf_8') #utf_8 to admit all characters in the response
+
+                    limit_list = [] #list to save all species within the limit
+                    body = json.loads(body) #loads is a json method to read json response
+                    limit = body["species"] #json.loads(species)
+
+                    if index > len(limit):   #if there are more species than the limit
+                        contents = f"""<!DOCTYPE html>
+                                                    <html lang = "en">
+                                                    <head>
+                                                     <meta charset = "utf-8" >
+                                                     <title>ERROR</title >
+                                                    </head>
+                                                    <body  style="background-color:rgb(255,255,182)">
+                                                    <p>ERROR LIMIT OUT OF RANGE. Introduce a valid limit value</p>
+                                                    <a href="/">Main page</a></body></html>"""
+                    else:
+                        for element in limit:  #iteration to get all the species within the limit
+                            limit_list.append(element["display_name"])   #appends each element to the list
+
+                            if len(limit_list) == index:
+                                contents += f"""<p>The species are: </p>"""
+                                for specie in limit_list:   #iteration to print all the species in the limit list
+                                    contents += f"""<p> - {specie} </p>"""
+                        contents += f"""<a href="/">Main page</a></body></html>""" #link to return to main page
 
 
 
@@ -133,104 +142,134 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                                 <body  style="background-color:rgb(255,255,182)">
                                 <h2 style="color:rgb(21,105,150);"> The names of the chromosomes are:</h2>"""
 
-                # Get the arguments after the ?
-                get_value = arguments[1]
-
-                # We get the seq index and name
-                specie = get_value.split('?')  # splits by the ?
-                specie_method, name_sp = specie[0].split("=")  # splits by the =
-
-                full_name = "" #we initialize the variable to keep doble or more word names
-                for n in range(0, len(name_sp)): #we iterate to inlude all the characters of the entire name (all words combined with +)
-                        if name_sp[n] == "+": #when we get a + we create a space with "%20" in the url to be able to search it in the database as a 2 (or more) word species
-                            full_name += "%20"
-                        else:
-                            full_name += name_sp[n] #in case its a one word species
-
-
-                endpoint = 'info/assembly/'  #stablishes the endpoint and its parameters for the request
-                parameters = '?content-type=application/json'
-                request = endpoint + full_name + parameters
-
                 try:
-                    conn.request("GET", request) #connection request
+                    # Get the arguments after the ?
+                    get_value = arguments[1]
 
-                except ConnectionRefusedError: #exception for connection error
-                    print("ERROR! Cannot connect to the Server")
-                    exit()
+                    # We get the seq index and name
+                    specie = get_value.split('?')  # splits by the ?
+                    specie_method, name_sp = specie[0].split("=")  # splits by the =
 
-                # ----------------------Main program of karyotype------------------------
-                # -- Read the response message from the server
-                response = conn.getresponse()
+                    full_name = "" #we initialize the variable to keep doble or more word names
+                    for n in range(0, len(name_sp)): #we iterate to inlude all the characters of the entire name (all words combined with +)
+                            if name_sp[n] == "+": #when we get a + we create a space with "%20" in the url to be able to search it in the database as a 2 (or more) word species
+                                full_name += "%20"
+                            else:
+                                full_name += name_sp[n] #in case its a one word species
 
-                # -- Read the response's body
-                body = response.read().decode("utf-8") #utf_8 to admit all characters in the response
-                body = json.loads(body) #loads is a json method to read json response
-                karyotype_data = body["karyotype"] #list to save all the names
 
-                for chromosome in karyotype_data: #iteration to print all the chromosomes names
-                    contents += f"""<p> - {chromosome} </p>"""
+                    endpoint = 'info/assembly/'  #stablishes the endpoint and its parameters for the request
+                    parameters = '?content-type=application/json'
+                    request = endpoint + full_name + parameters
 
-                contents += f"""<a href="/">Main page </a></body></html>"""  # link to return to main page
+                    try:
+                        conn.request("GET", request) #connection request
 
+                    except ConnectionRefusedError: #exception for connection error
+                        print("ERROR! Cannot connect to the Server")
+                        exit()
+
+                    # ----------------------Main program of karyotype------------------------
+                    # -- Read the response message from the server
+                    response = conn.getresponse()
+
+                    # -- Read the response's body
+                    body = response.read().decode("utf-8") #utf_8 to admit all characters in the response
+                    body = json.loads(body) #loads is a json method to read json response
+                    karyotype_data = body["karyotype"] #list to save all the names
+
+                    for chromosome in karyotype_data: #iteration to print all the chromosomes names
+                        contents += f"""<p> - {chromosome} </p>"""
+
+                    contents += f"""<a href="/">Main page </a></body></html>"""  # link to return to main page
+
+                except KeyError:
+                    contents = """<!DOCTYPE html> 
+                                    <html lang="en"> 
+                                        <head>
+                                            <meta charset="UTF-8">
+                                            <title>Error</title>
+                                        </head>
+                                        <body style="background-color:rgb(255,255,182)">
+                                            <h1>ERROR</h1>
+                                            <p> Selected specie's karyotype information is not available </p>
+                                            <p> Introduce a specie in the database to find its karyotype </p>
+                                            <a href="/"> Main page </a> </p>
+                                            </body>
+                                            </html>"""
 
             # --------------------------------------------Cromosome length--------------------------------------------
 
             elif first_argument == "/chromosomeLength": #part4, Return the Length of the chromosome named "chromo" of the given specie
 
-                # We get the arguments that go after the ?, it will get us the SPECIE&CHROMOSOME
-                pair = arguments[1]
-
-                # We have to separate both the species name and the chromo index inputed
-                pairs = pair.split('&')  #splits by the &
-                specie_name, specie = pairs[0].split("=") #having pair[0] as the species name
-
-                chromosome_index, chromosome = pairs[1].split("=") #having pair[1] as the species name
-
-                #html form for when no chromosome index is inputed
-                contents = f"""<!DOCTYPE html>
-                            <html lang = "en">
-                            <head>
-                             <meta charset = "utf-8" >
-                             <title>ERROR</title >
-                            </head>
-                            <body  style="background-color:rgb(255,255,182)">
-                            <p>ERROR INVALID VALUE. Introduce an integer value for chromosome</p>
-                            <a href="/">Main page</a></body></html>"""
-
-                full_name = ""  # we initialize the variable to keep doble or more word names
-                for n in range(0, len(specie)):  # we iterate to inlude all the characters of the entire name (all words combined with +)
-                    if specie[n] == "+":  # when we get a + we create a space with "%20" in the url to be able to search it in the database as a 2 (or more) word species
-                        full_name += "%20"
-                    else:
-                        full_name += specie[n]  # in case its a one word species
-
-                endpoint = 'info/assembly/'  # stablishes the endpoint and its parameters for the request
-                parameters = '?content-type=application/json'
-                request = endpoint + full_name + parameters
-
                 try:
-                    conn.request("GET", request)  #connection request
-                except ConnectionRefusedError: #exception for connection error
-                    print("ERROR! Cannot connect to the Server")
-                    exit()
+                    # We get the arguments that go after the ?, it will get us the SPECIE&CHROMOSOME
+                    pair = arguments[1]
 
-                # ----------------------Main program of chromosome length------------------------
-                # -- Read the response message from the server
-                response = conn.getresponse()
+                    # We have to separate both the species name and the chromo index inputed
+                    pairs = pair.split('&')  #splits by the &
+                    specie_name, specie = pairs[0].split("=") #having pair[0] as the species name
 
-                # -- Read the response's body
-                body = response.read().decode('utf-8')#utf_8 to admit all characters in the response
-                body = json.loads(body) #loads is a json method to read json response
+                    chromosome_index, chromosome = pairs[1].split("=") #having pair[1] as the species name
 
-                chromosome_data = body["top_level_region"] #list to save all the chromosomes
+                    #html form for when no chromosome index is inputed
+                    contents = f"""<!DOCTYPE html>
+                                <html lang = "en">
+                                <head>
+                                 <meta charset = "utf-8" >
+                                 <title>ERROR</title >
+                                </head>
+                                <body  style="background-color:rgb(255,255,182)">
+                                <p>ERROR INVALID VALUE. Introduce an integer value for chromosome</p>
+                                <a href="/">Main page</a></body></html>"""
 
-                for chromo in chromosome_data: #iteration to get all the chromosomes within the list of data
+                    full_name = ""  # we initialize the variable to keep doble or more word names
+                    for n in range(0, len(specie)):  # we iterate to inlude all the characters of the entire name (all words combined with +)
+                        if specie[n] == "+":  # when we get a + we create a space with "%20" in the url to be able to search it in the database as a 2 (or more) word species
+                            full_name += "%20"
+                        else:
+                            full_name += specie[n]  # in case its a one word species
 
-                    if chromo["name"] == str(chromosome):
-                        length = chromo["length"]
-                        contents = f"""<!DOCTYPE html><html lang = "en"><head><meta charset = "utf-8" ><title> Length Chromosome</title >
-                                        </head ><body  style="background-color:rgb(255,255,182)"><h2 style="color:rgb(21,105,150);"> The length of the '{chromosome}' {specie} chromosome is: {length}</h2><a href="/"> Main page</a"""
+                    endpoint = 'info/assembly/'  # stablishes the endpoint and its parameters for the request
+                    parameters = '?content-type=application/json'
+                    request = endpoint + full_name + parameters
+
+                    try:
+                        conn.request("GET", request)  #connection request
+                    except ConnectionRefusedError: #exception for connection error
+                        print("ERROR! Cannot connect to the Server")
+                        exit()
+
+                    # ----------------------Main program of chromosome length------------------------
+                    # -- Read the response message from the server
+                    response = conn.getresponse()
+
+                    # -- Read the response's body
+                    body = response.read().decode('utf-8')#utf_8 to admit all characters in the response
+                    body = json.loads(body) #loads is a json method to read json response
+
+                    chromosome_data = body["top_level_region"] #list to save all the chromosomes
+
+                    for chromo in chromosome_data: #iteration to get all the chromosomes within the list of data
+
+                        if chromo["name"] == str(chromosome):
+                            length = chromo["length"]
+                            contents = f"""<!DOCTYPE html><html lang = "en"><head><meta charset = "utf-8" ><title> Length Chromosome</title >
+                                            </head ><body  style="background-color:rgb(255,255,182)"><h2 style="color:rgb(21,105,150);"> The length of the '{chromosome}' {specie} chromosome is: {length}</h2><a href="/"> Main page</a"""
+                except KeyError:
+                    contents = """<!DOCTYPE html> 
+                                                    <html lang="en"> 
+                                                        <head>
+                                                            <meta charset="UTF-8">
+                                                            <title>Error</title>
+                                                        </head>
+                                                        <body style="background-color:rgb(255,255,182)">
+                                                            <h1>ERROR</h1>
+                                                            <p> Selected specie's karyotype information is not available </p>
+                                                            <p> Introduce a specie in the database to find its karyotype </p>
+                                                            <a href="/"> Main page </a> </p>
+                                                            </body>
+                                                            </html>"""
 
             # --------------------------------------------gene Seq--------------------------------------------
 
