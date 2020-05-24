@@ -59,74 +59,90 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                                     </head >
                                     <body  style="background-color:rgb(255,255,182)">
                                      <h1 style="color:rgb(21,105,150);"> List of species in the genome database</h1>
-                                     <p style="color:rgb(21,105,150);"><b>The total number of species in ensembl is: 267</b></p>
+                                     <p style="color:rgb(21,105,150);"><b>The total number of species in ensembl is: 286</b></p>
                                      <p>The total number of species in ensembl is: 286</p>"""
 
+                try:
+                    #Get the arguments after the ?
+                    get_value = arguments[1]
 
-                #Get the arguments after the ?
-                get_value = arguments[1]
-
-                #We need the value of the index --> position of the sequence
-                seq_n = get_value.split('?')  #splits the argument by the ?
-                seq_name, index = seq_n[0].split("=")  #splits by the =
-
-                # menu of iteration to chose the path to act when the limit is inputed
-                if index == "":  #no index is inputed --> all list must be printed
-                    index = "286"
-                index = int(index)
-                if index <= 0: #index less or equal to 0 --> error
-                    contents = Path('Error.html').read_text()
-                if index > 0: #index more than 0
-                    #html to print the total numbers of species selected
-                    contents += f"""<p>The number of species you selected are: {index} </p>"""
-
-                    #now program starts, gets the requested limit and ...
-
-                    endpoint = 'info/species'  #stablishes the endpoint and its parameters for the request
-                    parameters = '?content-type=application/json'
-                    request = endpoint + parameters
+                    #We need the value of the index --> position of the sequence
+                    seq_n = get_value.split('?')  #splits the argument by the ?
+                    seq_name, index = seq_n[0].split("=")  #splits by the =
 
 
-                    try:
-                        conn.request("GET", request)   #connection request
+                    # menu of iteration to chose the path to act when the limit is inputed
+                    if index == "":  #no index is inputed --> all list must be printed
+                        index = "286"
+                    index = int(index)
+                    if index <= 0: #index less or equal to 0 --> error
+                        contents = Path('Error.html').read_text()
+                    if index > 0: #index more than 0
+                        #html to print the total numbers of species selected
+                        contents += f"""<p>The number of species you selected are: {index} </p>"""
 
-                    except ConnectionRefusedError:   #exception for connection error
-                        print("ERROR! Cannot connect to the Server")
-                        exit()
+                        #now program starts, gets the requested limit and ...
+
+                        endpoint = 'info/species'  #stablishes the endpoint and its parameters for the request
+                        parameters = '?content-type=application/json'
+                        request = endpoint + parameters
 
 
-                    #----------------------Main program of listSpecies------------------------
+                        try:
+                            conn.request("GET", request)   #connection request
 
-                    # -- Read the response message from the server
-                    response = conn.getresponse()
+                        except ConnectionRefusedError:   #exception for connection error
+                            print("ERROR! Cannot connect to the Server")
+                            exit()
 
-                    # -- Read the response's body
-                    body = response.read().decode('utf_8') #utf_8 to admit all characters in the response
 
-                    limit_list = [] #list to save all species within the limit
-                    body = json.loads(body) #loads is a json method to read json response
-                    limit = body["species"] #json.loads(species)
+                        #----------------------Main program of listSpecies------------------------
 
-                    if index > len(limit):   #if there are more species than the limit
-                        contents = f"""<!DOCTYPE html>
-                                                    <html lang = "en">
-                                                    <head>
-                                                     <meta charset = "utf-8" >
-                                                     <title>ERROR</title >
-                                                    </head>
-                                                    <body  style="background-color:rgb(255,255,182)">
-                                                    <p>ERROR LIMIT OUT OF RANGE. Introduce a valid limit value</p>
-                                                    <a href="/">Main page</a></body></html>"""
-                    else:
-                        for element in limit:  #iteration to get all the species within the limit
-                            limit_list.append(element["display_name"])   #appends each element to the list
+                        # -- Read the response message from the server
+                        response = conn.getresponse()
 
-                            if len(limit_list) == index:
-                                contents += f"""<p>The species are: </p>"""
-                                for specie in limit_list:   #iteration to print all the species in the limit list
-                                    contents += f"""<p> - {specie} </p>"""
-                        contents += f"""<a href="/">Main page</a></body></html>""" #link to return to main page
+                        # -- Read the response's body
+                        body = response.read().decode('utf_8') #utf_8 to admit all characters in the response
 
+                        limit_list = [] #list to save all species within the limit
+                        body = json.loads(body) #loads is a json method to read json response
+                        limit = body["species"] #json.loads(species)
+
+                        if index > len(limit):   #if there are more species than the limit
+                            contents = f"""<!DOCTYPE html>
+                                                        <html lang = "en">
+                                                        <head>
+                                                         <meta charset = "utf-8" >
+                                                         <title>ERROR</title >
+                                                        </head>
+                                                        <body  style="background-color:rgb(255,255,182)">
+                                                        <p>ERROR LIMIT OUT OF RANGE</p>
+                                                        <p> Introduce a valid limit</p>
+                                                        <a href="/">Main page</a></body></html>"""
+                        else:
+                            for element in limit:  #iteration to get all the species within the limit
+                                limit_list.append(element["display_name"])   #appends each element to the list
+
+                                if len(limit_list) == index:
+                                    contents += f"""<p>The species are: </p>"""
+                                    for specie in limit_list:   #iteration to print all the species in the limit list
+                                        contents += f"""<p> - {specie} </p>"""
+                            contents += f"""<a href="/">Main page</a></body></html>""" #link to return to main page
+
+                except KeyError: #exception in case no value or an incorrect format value is inputed
+                    contents = """<!DOCTYPE html> 
+                                    <html lang="en"> 
+                                        <head>
+                                            <meta charset="UTF-8">
+                                            <title>Error</title>
+                                        </head>
+                                        <body style="background-color:rgb(255,255,182)">
+                                            <h1>ERROR</h1>
+                                            <p> Selected specie's karyotype information is not available </p>
+                                            <p> Introduce a specie in the database to find its karyotype </p>
+                                            <a href="/"> Main page </a> </p>
+                                            </body>
+                                            </html>"""
 
 
 
@@ -221,7 +237,8 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                                  <title>ERROR</title >
                                 </head>
                                 <body  style="background-color:rgb(255,255,182)">
-                                <p>ERROR INVALID VALUE. Introduce an integer value for chromosome</p>
+                                <p>ERROR INVALID VALUE</p>
+                                <p> Introduce a valid integer value for chromosome of this species</p>
                                 <a href="/">Main page</a></body></html>"""
 
                     full_name = ""  # we initialize the variable to keep doble or more word names
