@@ -206,6 +206,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                     body = json.loads(body) #loads is a json method to read json response
                     karyotype_data = body["karyotype"] #list to save all the names
 
+
                     for chromosome in karyotype_data: #iteration to print all the chromosomes names
                         contents += f"""<p> - {chromosome} </p>"""
 
@@ -279,7 +280,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                     body = json.loads(body) #loads is a json method to read json response
 
                     chromosome_data = body["top_level_region"] #list to save all the chromosomes
-
+                    specie = specie.replace("+", " ") #to print it with a space between both words (in double word species)
                     for chromo in chromosome_data: #iteration to get all the chromosomes within the list of data
 
                         if chromo["name"] == str(chromosome):
