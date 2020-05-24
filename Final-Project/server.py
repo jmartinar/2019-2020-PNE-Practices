@@ -70,16 +70,17 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 seq_n = get_value.split('?')  #splits the argument by the ?
                 seq_name, index = seq_n[0].split("=")  #splits by the =
 
-                if index == "":
+                # menu of iteration to chose the path to act when the limit is inputed
+                if index == "":  #no index is inputed --> all list must be printed
                     index = "286"
                 index = int(index)
-                if index <= 0:
-                    contents = Path('error.html').read_text()
-                if index > 0:
-                    # Just addition to html response...
+                if index <= 0: #index less or equal to 0 --> error
+                    contents = Path('Error.html').read_text()
+                if index > 0: #index more than 0
+                    #html to print the total numbers of species selected
                     contents += f"""<p>The number of species you selected are: {index} </p>"""
 
-                    #html to print the total numbers of species selected
+                    #now program starts, gets the requested limit and ...
 
                     endpoint = 'info/species'  #stablishes the endpoint and its parameters for the request
                     parameters = '?content-type=application/json'
@@ -183,7 +184,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
                     contents += f"""<a href="/">Main page </a></body></html>"""  # link to return to main page
 
-                except KeyError:
+                except KeyError: #exception in case no value or an incorrect format value is inputed
                     contents = """<!DOCTYPE html> 
                                     <html lang="en"> 
                                         <head>
@@ -256,7 +257,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                             length = chromo["length"]
                             contents = f"""<!DOCTYPE html><html lang = "en"><head><meta charset = "utf-8" ><title> Length Chromosome</title >
                                             </head ><body  style="background-color:rgb(255,255,182)"><h2 style="color:rgb(21,105,150);"> The length of the '{chromosome}' {specie} chromosome is: {length}</h2><a href="/"> Main page</a"""
-                except KeyError:
+                except KeyError: #exception in case no value or an incorrect format value is inputed
                     contents = """<!DOCTYPE html> 
                                                     <html lang="en"> 
                                                         <head>
@@ -337,7 +338,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                     sequence = second_body["seq"] #gene sequence asked
                     contents += f"""<p>{sequence}</p><a href="/">Main page</a></body></html>"""  #print the sequence on screen
 
-                except KeyError:
+                except KeyError: #exception in case no value or an incorrect format value is inputed
                     contents = """<!DOCTYPE html> 
                                       <html lang="en"> 
                                             <head>
@@ -421,7 +422,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                                 <p> -ID is at: {id_gene} </p> <p> Located in chromosome: {second_body ["seq_region_name"]} </p>
                                 <a href="/">Main page</a></body></html>"""
 
-                except KeyError:
+                except KeyError: #exception in case no value or an incorrect format value is inputed
                     contents = """<!DOCTYPE html> 
                                                 <html lang="en"> 
                                                       <head>
@@ -509,7 +510,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                         contents += f"""<p> {base} : {sequence.count_base(base)} ({perc_base}%) </p>"""
                     contents += f"""<a href="/">Main page</a></body></html>"""
 
-                except KeyError:
+                except KeyError: #exception in case no value or an incorrect format value is inputed
                     contents = """<!DOCTYPE html> 
                                                 <html lang="en"> 
                                                       <head>
@@ -574,7 +575,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                         contents += f"""<p>{element["external_name"]}</p>"""
                     contents += f"""<a href="/">Main page</a></body></html>"""
 
-                except KeyError:
+                except KeyError: #exception in case no value or an incorrect format value is inputed
                     contents = """<!DOCTYPE html> 
                                                     <html lang="en"> 
                                                           <head>
