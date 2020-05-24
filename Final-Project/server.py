@@ -168,7 +168,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                                      <title> Karyotype </title >
                                 </head >
                                 <body  style="background-color:rgb(255,255,182)">
-                                <h2 style="color:rgb(21,105,150);"> The names of the chromosomes are:</h2>"""
+                                """
 
                 try:
                     # Get the arguments after the ?
@@ -206,6 +206,8 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                     body = json.loads(body) #loads is a json method to read json response
                     karyotype_data = body["karyotype"] #list to save all the names
 
+                    full_name = full_name.replace("%20"," ")#to print it with a space between both words (in double word species)
+                    contents += f"""<h2 style="color:rgb(21,105,150);"> The names of the {full_name} chromosomes are:</h2>"""
 
                     for chromosome in karyotype_data: #iteration to print all the chromosomes names
                         contents += f"""<p> - {chromosome} </p>"""
@@ -281,6 +283,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
                     chromosome_data = body["top_level_region"] #list to save all the chromosomes
                     specie = specie.replace("+", " ") #to print it with a space between both words (in double word species)
+
                     for chromo in chromosome_data: #iteration to get all the chromosomes within the list of data
 
                         if chromo["name"] == str(chromosome):
