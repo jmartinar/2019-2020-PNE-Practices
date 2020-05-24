@@ -76,7 +76,18 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                         index = "286"
                     index = int(index)
                     if index <= 0: #index less or equal to 0 --> error
-                        contents = Path('Error.html').read_text()
+                        contents = """<!DOCTYPE html>
+                                <html lang="en" dir="ltr">
+                                  <head>
+                                    <meta charset="utf-8">
+                                    <title>ERROR</title>
+                                  </head>
+                                  <body style="background-color: red;">
+                                    <h1>ERROR</h1>
+                                    <p>Resource not available</p>
+                                    <p>Your search's limit is equal or less than 0</p>
+                                  </body>
+                                </html>"""
                     if index > 0: #index more than 0
                         #html to print the total numbers of species selected
                         contents += f"""<p>The number of species you selected are: {index} </p>"""
@@ -288,6 +299,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                                                             <a href="/"> Main page </a> </p>
                                                             </body>
                                                             </html>"""
+                    contents += f"""<p><br><a href="/Karyotype?Specie={full_name}">Check if your specie is in our database</a><br>"""
 
             # --------------------------------------------gene Seq--------------------------------------------
 
