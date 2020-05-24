@@ -584,45 +584,30 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                     chromosome_start, start = pairs[1].split("=") #chromosome start (pair[1] column)
                     chromosome_end, end = pairs[2].split("=")  #chromosome end (pair[2] column)
 
-                    if start == "" or end == "": #exception module for when no start or end values are inputed
-                        contents =  """<!DOCTYPE html> 
-                                                    <html lang="en"> 
-                                                          <head>
-                                                              <meta charset="UTF-8">
-                                                              <title>Error</title>
-                                                          </head>
-                                                          <body style="background-color:rgb(255,255,182)">
-                                                              <h1>ERROR</h1>
-                                                              <p> Selected specie's gene interval sequence information is not available </p>
-                                                              <p> Introduce valid values for start/end of the interval </p>
-                                                              <a href="/"> Main page </a> </p>
-                                                              </body>
-                                                    </html>"""
-                    else:
-                        contents += f"""<p style="color:rgb(225, 141, 27)"> List of genes of the chromosome {chromo}, which goes from {start} to {end}: </p>"""
+                    contents += f"""<p style="color:rgb(225, 141, 27)"> List of genes of the chromosome {chromo}, which goes from {start} to {end}: </p>"""
 
-                        endpoint = "overlap/region/human/"  # first endpoint --> human
-                        parameters = '?feature=gene;content-type=application/json'
-                        request = endpoint + chromo + ":" + start + "-" + end + parameters #request line
+                    endpoint = "overlap/region/human/"  # first endpoint --> human
+                    parameters = '?feature=gene;content-type=application/json'
+                    request = endpoint + chromo + ":" + start + "-" + end + parameters #request line
 
-                        try:
-                            conn.request("GET", request)#connection request
+                    try:
+                        conn.request("GET", request)#connection request
 
-                        except ConnectionRefusedError:
-                            print("ERROR! Cannot connect to the Server") #exception for connection error
-                            exit()
+                    except ConnectionRefusedError:
+                        print("ERROR! Cannot connect to the Server") #exception for connection error
+                        exit()
 
-                        # ----------------------Main program of geneList------------------------
-                        # -- Read the response message from the server
-                        response = conn.getresponse()
-                        # -- Read the response's body
-                        body = response.read().decode("utf-8") #utf_8 to admit all characters in the response
-                        body = json.loads(body)
+                    # ----------------------Main program of geneList------------------------
+                    # -- Read the response message from the server
+                    response = conn.getresponse()
+                    # -- Read the response's body
+                    body = response.read().decode("utf-8") #utf_8 to admit all characters in the response
+                    body = json.loads(body)
 
-                        for element in body: #iteration to print all the elements of the chromosome within the chosen limits
-                            print(element["external_name"])
-                            contents += f"""<p>{element["external_name"]}</p>"""
-                        contents += f"""<a href="/">Main page</a></body></html>"""
+                    for element in body: #iteration to print all the elements of the chromosome within the chosen limits
+                        print(element["external_name"])
+                        contents += f"""<p>{element["external_name"]}</p>"""
+                    contents += f"""<a href="/">Main page</a></body></html>"""
 
                 except KeyError: #exception in case no value or an incorrect format value is inputed
                     contents = """<!DOCTYPE html> 
