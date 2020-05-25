@@ -1529,7 +1529,7 @@ http://127.0.0.1:8080/listSpecies?limit=286
    </body>
 </html>
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-* TEST 11 ERROR/EXCEPTION when 0 is introduced:
+* TEST 11 ERROR/EXCEPTION when limit 0 or less is introduced:
 
 * Input:
 
@@ -1564,8 +1564,7 @@ http://127.0.0.1:8080/listSpecies?limit=a
    </head>
    <body style="background-color:rgb(255,255,182)">
       <h1>ERROR</h1>
-      <p> Selected specie's karyotype information is not available </p>
-      <p> Introduce a specie in the database to find its karyotype </p>
+      <p> Limit must be a number </p>
       <a href="/"> Main page </a> </p>
    </body>
 </html>
@@ -1802,7 +1801,7 @@ http://127.0.0.1:8080/karyotype?Specie=1325135
    <body style="background-color:rgb(255,255,182)">
       <h1>ERROR</h1>
       <p> Selected specie's karyotype information is not available </p>
-      <p><a href="/Karyotype?Specie=1325135">Check if your specie is in our database</a><br><br>
+      <p><a href="/karyotype?Specie=1325135">Check if your specie is in our database</a><br><br>
       <p> Introduce a specie in the database to find its karyotype </p>
       <a href="/"> Main page </a> </p>
    </body>
@@ -1999,7 +1998,7 @@ http://127.0.0.1:8080/chromosomeLength?Specie=12345&Chromosome=12
       <h1>ERROR</h1>
       <p> Selected specie's cromosome length information is not available </p>
       <p> Introduce a specie in the database (with a proper chromosome) to find its length information </p>
-      <p><a href="/Karyotype?Specie=12345">Check if your specie is in our database</a><br><br>
+      <p><a href="/karyotype?Specie=12345">Check if your specie is in our database</a><br><br>
          <a href="/"> Main page </a>
       </p>
    </body>

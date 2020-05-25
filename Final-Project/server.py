@@ -83,8 +83,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                                                             </head>
                                                             <body style="background-color:rgb(255,255,182)">
                                                                 <h1>ERROR</h1>
-                                                                <p> Selected specie's karyotype information is not available </p>
-                                                                <p> Introduce a specie in the database to find its karyotype </p>
+                                                                <p> Limit must be a number </p>
                                                                 <a href="/"> Main page </a> </p>
                                                                 </body>
                                                                 </html>"""
@@ -224,7 +223,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                                         <body style="background-color:rgb(255,255,182)">
                                             <h1>ERROR</h1>
                                             <p> Selected specie's karyotype information is not available </p>
-                                            <p><a href="/Karyotype?Specie={full_name}">Check if your specie is in our database</a><br><br>
+                                            <p><a href="/karyotype?Specie={full_name}">Check if your specie is in our database</a><br><br>
                                             <p> Introduce a specie in the database to find its karyotype </p>
                                             <a href="/"> Main page </a> </p>
                                             </body>
@@ -301,7 +300,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                                                             <h1>ERROR</h1>
                                                             <p> Selected specie's cromosome length information is not available </p>
                                                             <p> Introduce a specie in the database (with a proper chromosome) to find its length information </p>
-                                                            <p><a href="/Karyotype?Specie={full_name}">Check if your specie is in our database</a><br><br>
+                                                            <p><a href="/karyotype?Specie={full_name}">Check if your specie is in our database</a><br><br>
                                                             <a href="/"> Main page </a> </p>
                                                             </body>
                                                             </html>"""
