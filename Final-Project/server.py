@@ -101,7 +101,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                                     <p>Your search's limit is equal or less than 0</p>
                                   </body>
                                 </html>"""
-                if index > 0: #index more than 0
+                if index > 0: #index more than 0 --> normal execution of the program
                     #html to print the total numbers of species selected
                     contents += f"""<p>The number of species you selected are: {index} </p>"""
 
@@ -211,7 +211,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                     for chromosome in karyotype_data: #iteration to print all the chromosomes names
                         contents += f"""<p> - {chromosome} </p>"""
 
-                    contents += f"""<a href="/">Main page </a></body></html>"""  # link to return to main page
+                    contents += f"""<a href="/">Main page </a></body></html>"""  #link to return to main page
 
                 except KeyError: #exception in case no value or an incorrect format value is inputed
                     contents = f"""<!DOCTYPE html> 
@@ -285,10 +285,11 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
                     for chromo in chromosome_data: #iteration to get all the chromosomes within the list of data
 
-                        if chromo["name"] == str(chromosome):
+                        if chromo["name"] == str(chromosome): #to print the cromosome length
                             length = chromo["length"]
                             contents = f"""<!DOCTYPE html><html lang = "en"><head><meta charset = "utf-8" ><title> Length Chromosome</title >
                                             </head ><body  style="background-color:rgb(255,255,182)"><h2 style="color:rgb(21,105,150);"> The length of the '{chromosome}' {specie} chromosome is: {length}</h2><a href="/"> Main page</a"""
+
                 except KeyError: #exception in case no value or an incorrect format value is inputed
                     contents = f"""<!DOCTYPE html> 
                                                     <html lang="en"> 
